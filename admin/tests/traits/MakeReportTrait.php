@@ -1,0 +1,53 @@
+<?php
+
+use Faker\Factory as Faker;
+use App\Models\Report;
+use App\Repositories\ReportRepository;
+
+trait MakeReportTrait
+{
+    /**
+     * Create fake instance of Report and save it in database
+     *
+     * @param array $reportFields
+     * @return Report
+     */
+    public function makeReport($reportFields = [])
+    {
+        /** @var ReportRepository $reportRepo */
+        $reportRepo = App::make(ReportRepository::class);
+        $theme = $this->fakeReportData($reportFields);
+        return $reportRepo->create($theme);
+    }
+
+    /**
+     * Get fake instance of Report
+     *
+     * @param array $reportFields
+     * @return Report
+     */
+    public function fakeReport($reportFields = [])
+    {
+        return new Report($this->fakeReportData($reportFields));
+    }
+
+    /**
+     * Get fake data of Report
+     *
+     * @param array $postFields
+     * @return array
+     */
+    public function fakeReportData($reportFields = [])
+    {
+        $fake = Faker::create();
+
+        return array_merge([
+            'assigment_id' => $fake->randomDigitNotNull,
+            'task_id' => $fake->randomDigitNotNull,
+            'ativity_id' => $fake->randomDigitNotNull,
+            'report_title' => $fake->word,
+            'created_at' => $fake->word,
+            'updated_at' => $fake->word
+        ], $reportFields);
+    }
+}

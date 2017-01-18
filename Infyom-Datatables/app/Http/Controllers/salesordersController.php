@@ -10,6 +10,7 @@ use App\Repositories\salesordersRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
+use DB;
 
 class salesordersController extends AppBaseController
 {
@@ -39,7 +40,8 @@ class salesordersController extends AppBaseController
      */
     public function create()
     {
-        return view('salesorders.create');
+        $tanggal = date('d-m-Y');
+        return view('salesorders.create', compact('tanggal'));
     }
 
 
@@ -148,5 +150,35 @@ class salesordersController extends AppBaseController
         Flash::success('Salesorders deleted successfully.');
 
         return redirect(route('salesorders.index'));
+    }
+
+    /**
+     * Generate Sales Order Number
+     *
+     * @param  int $customer
+     *
+     * @return String
+     */
+    public function ajaxGetNumber()
+    {
+        $custid = @$_GET["custid"];
+        $custcode = @$_GET["custcode"];
+
+        $hasil = DB::table('salesorders')
+            ->where('customerID',$custid)
+            ->select('soNo')
+            ->orderBy('id', 'desc')->limit(1)->get();
+
+        if($hasil->count() === 0)
+        {
+            $soNo = "ORD/" . $custcode . "/" . str_pad('1', 5, "0", STR_PAD_LEFT);
+        }else
+        {
+            $res = $hasil->first();
+            $exp = explode("/", $res->soNo);
+            $lastNo = ltrim($exp[2], "0");
+            $soNo = "ORD/" . $exp[1] . "/" . str_pad($lastNo+1, 5, "0", STR_PAD_LEFT);
+        }
+        echo json_encode(array('sono' => $soNo));
     }
 }

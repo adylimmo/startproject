@@ -13,7 +13,7 @@
 <!-- Unit Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('unit', 'Unit:') !!}
-    {!! Form::select('unit', ['0' => 'PCS', '1' => 'SET', '2' => 'BOX'], null, ['class' => 'form-control']) !!}
+    {!! Form::select('unit', ['0' => 'PCS', '1' => 'SET', '2' => 'LSN'], null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Note Field -->

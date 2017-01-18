@@ -64,6 +64,7 @@ Route::resource('factories', 'factoriesController');
 
 Route::resource('products', 'productsController');
 Route::resource('salesorders', 'salesordersController');
+Route::get('/ajax-sales-order', 'salesordersController@ajaxGetNumber');
 
 Route::resource('suppliers', 'suppliersController');
 
@@ -74,5 +75,14 @@ Route::resource('salesinvoices', 'salesinvoiceController');
 |--------------------------------------------------------------------------
 |
 */
-Route::get('/ajax-cuxtomer', 'ajaxMasterController@ajaxcustomer');
+Route::get('/ajax-customer', 'ajaxMasterController@ajaxcustomer');
 Route::get('/ajax-product', 'ajaxMasterController@ajaxproduct');
+
+/*
+|--------------------------------------------------------------------------
+| Example Print,
+|--------------------------------------------------------------------------
+|
+*/
+Route::get('exportpdf', 'YourController@exportpdf');
+Route::get('printproducts', 'YourController@printproducts');

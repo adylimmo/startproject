@@ -19,6 +19,7 @@ class stock_productsController extends AppBaseController
     public function __construct(stock_productsRepository $stockProductsRepo)
     {
         $this->stockProductsRepository = $stockProductsRepo;
+        $this->middleware('auth');
     }
 
     /**

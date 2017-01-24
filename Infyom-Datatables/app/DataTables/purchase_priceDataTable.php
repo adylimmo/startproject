@@ -47,7 +47,7 @@ class purchase_priceDataTable extends DataTable
                 'dom' => 'Bfrtip',
                 'scrollX' => false,
                 'buttons' => [
-                    'print',
+                    // 'print',
                     'reset',
                     'reload',
                     [

@@ -19,6 +19,7 @@ class suppliersController extends AppBaseController
     public function __construct(suppliersRepository $suppliersRepo)
     {
         $this->suppliersRepository = $suppliersRepo;
+        $this->middleware('auth');
     }
 
     /**

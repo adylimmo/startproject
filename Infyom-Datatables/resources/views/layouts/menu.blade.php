@@ -16,35 +16,17 @@
     </a>
     <ul class="treeview-menu">
         <li class="{{ Request::is('customers*') ? 'active' : '' }}">
-            <a href="{!! route('customers.index') !!}"><i class="fa fa-angle-double-right"></i><span>Customers</span></a>
+            <a href="{!! route('customers.index') !!}"><i class="fa fa-angle-double-right"></i><span>Data Customer</span></a>
         </li>
 
-        <li class="{{ Request::is('companies*') ? 'active' : '' }}">
-            <a href="{!! route('companies.index') !!}"><i class="fa fa-angle-double-right"></i><span>Perusahaan</span></a>
+        <li class="{{ Request::is('produks*') ? 'active' : '' }}">
+            <a href="{!! route('produks.index') !!}"><i class="fa fa-angle-double-right"></i><span>Data Produk</span></a>
         </li>
-
-        <li class="{{ Request::is('factories*') ? 'active' : '' }}">
-            <a href="{!! route('factories.index') !!}"><i class="fa fa-angle-double-right"></i><span>Gudang</span></a>
-        </li>
-
-        
 
         <li class="{{ Request::is('salesPrices*') ? 'active' : '' }}">
-            <a href="{!! route('salesPrices.index') !!}"><i class="fa fa-angle-double-right"></i><span>Product Prices</span></a>
-        </li>
-        <li class="{{ Request::is('salesorders*') ? 'active' : '' }}">
-            <a href="{!! route('salesorders.index') !!}"><i class="fa fa-angle-double-right"></i><span>S.O</span></a>
-        </li>
-        <li class="{{ Request::is('suppliers*') ? 'active' : '' }}">
-            <a href="{!! route('suppliers.index') !!}"><i class="fa fa-angle-double-right"></i><span>suppliers</span></a>
+            <a href="{!! route('salesPrices.index') !!}"><i class="fa fa-angle-double-right"></i><span>Harga Produk</span></a>
         </li>
 
-        <li class="{{ Request::is('salesinvoices*') ? 'active' : '' }}">
-            <a href="{!! route('salesinvoices.index') !!}"><i class="fa fa-angle-double-right"></i><span>salesinvoices</span></a>
-        </li>
-        <li class="{{ Request::is('products*') ? 'active' : '' }}">
-            <a href="{!! route('products.index') !!}"><i class="fa fa-angle-double-right"></i><span>products</span></a>
-        </li>
     </ul>
 </li>
 @endif
@@ -60,16 +42,21 @@
     <ul class="treeview-menu">
         @if(Auth::user()->level == '1' or Auth::user()->level == '2' or Auth::user()->level == '3')
         <li class="{{ Request::is('salesorders*') ? 'active' : '' }}">
-            <a href="{!! route('salesorders.index') !!}"><i class="fa fa-angle-double-right"></i><span>Sales Order</span></a>
+            <a href="{!! route('salesorders.index') !!}"><i class="fa fa-angle-double-right"></i><span>Pemesanan Barang</span></a>
         </li> 
-        @endif       
+        @endif  
+
+        @if(Auth::user()->level == '1' or Auth::user()->level == '2' or Auth::user()->level == '3')
+        <li class="{{ Request::is('salesinvoices*') ? 'active' : '' }}">
+            <a href="{!! route('salesinvoices.index') !!}"><i class="fa fa-angle-double-right"></i><span>Faktur Penjualan</span></a>
+        </li>  
+        @endif     
 
         @if(Auth::user()->level == '1' or Auth::user()->level == '2' or Auth::user()->level == '4')
         <li class="{{ Request::is('salespayments*') ? 'active' : '' }}">
-            <a href="{!! route('salespayments.index') !!}"><i class="fa fa-angle-double-right"></i><span>Pembayaran</span></a>
+            <a href="{!! route('salespayments.index') !!}"><i class="fa fa-angle-double-right"></i><span>Faktur Pembayaran</span></a>
         </li>
         @endif
     </ul>
 </li>
 @endif
-

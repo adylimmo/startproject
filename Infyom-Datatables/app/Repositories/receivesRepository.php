@@ -15,11 +15,7 @@ class receivesRepository extends BaseRepository
         'customerID',
         'invoiceTotal',
         'receiveTotal',
-        'refundTotal',
-        'createdDate',
-        'createdUserID',
-        'modifiedDate',
-        'modifiedUserID'
+        'refundTotal'
     ];
 
     /**

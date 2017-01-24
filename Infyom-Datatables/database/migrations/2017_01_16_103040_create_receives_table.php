@@ -20,10 +20,6 @@ class CreatereceivesTable extends Migration
             $table->integer('invoiceTotal');
             $table->integer('receiveTotal');
             $table->integer('refundTotal');
-            $table->date('createdDate');
-            $table->integer('createdUserID');
-            $table->date('modifiedDate');
-            $table->integer('modifiedUserID');
             $table->timestamps();
             $table->softDeletes();
         });

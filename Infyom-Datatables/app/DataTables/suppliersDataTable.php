@@ -47,7 +47,7 @@ class suppliersDataTable extends DataTable
                 'dom' => 'Bfrtip',
                 'scrollX' => false,
                 'buttons' => [
-                    'print',
+                    // 'print',
                     'reset',
                     'reload',
                     [

@@ -2,10 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Salesorders</h1>
-        <h1 class="pull-right">
-           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('salesorders.create') !!}">Add New</a>
-        </h1>
+        <h1 class="pull-left">Pemesanan</h1>
     </section>
     <div class="content">
         <div class="clearfix"></div>
@@ -15,6 +12,12 @@
         <div class="clearfix"></div>
         <div class="box box-primary">
             <div class="box-body">
+            <h1 class="pull-right">
+                <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('salesorders.create') !!}"><i class="fa fa-plus"></i> Pemesanan Baru</a>
+            </h1>
+            <h1 class="pull-left">
+                <a class="btn btn-success pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{{url('/PrintSalesOrder')}}"><i class="fa fa-print"></i> Cetak</a>
+            </h1>
                     @include('salesorders.table')
             </div>
         </div>

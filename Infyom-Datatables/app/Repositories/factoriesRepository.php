@@ -15,11 +15,7 @@ class factoriesRepository extends BaseRepository
         'factoryName',
         'factoryType',
         'status',
-        'note',
-        'createdDate',
-        'createdUserID',
-        'modifiedDate',
-        'modifiedUserID'
+        'note'
     ];
 
     /**

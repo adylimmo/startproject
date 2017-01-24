@@ -40,11 +40,7 @@ class customers extends Model
         'npwp',
         'pkpName',
         'category',
-        'status',
-        'createdDate',
-        'createdUserID',
-        'modifiedDate',
-        'modifiedUserID'
+        'status'
     ];
 
     /**
@@ -72,11 +68,7 @@ class customers extends Model
         'npwp' => 'string',
         'pkpName' => 'string',
         'category' => 'string',
-        'status' => 'string',
-        'createdDate' => 'date',
-        'createdUserID' => 'integer',
-        'modifiedDate' => 'date',
-        'modifiedUserID' => 'integer'
+        'status' => 'string'
     ];
 
     /**
@@ -104,11 +96,7 @@ class customers extends Model
         'npwp' => 'required',
         'pkpName' => 'required',
         'category' => 'required',
-        'status' => 'required',
-        'createdDate' => 'date',
-        'createdUserID' => 'numeric',
-        'modifiedDate' => 'date',
-        'modifiedUserID' => 'numeric'
+        'status' => 'required'
     ];
 
     

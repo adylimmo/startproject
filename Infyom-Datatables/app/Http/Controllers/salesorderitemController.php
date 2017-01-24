@@ -19,6 +19,7 @@ class salesorderitemController extends AppBaseController
     public function __construct(salesorderitemRepository $salesorderitemRepo)
     {
         $this->salesorderitemRepository = $salesorderitemRepo;
+        $this->middleware('auth');
     }
 
     /**

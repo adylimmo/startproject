@@ -19,6 +19,7 @@ class factoriesController extends AppBaseController
     public function __construct(factoriesRepository $factoriesRepo)
     {
         $this->factoriesRepository = $factoriesRepo;
+        $this->middleware('auth');
     }
 
     /**

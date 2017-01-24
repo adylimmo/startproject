@@ -18,11 +18,7 @@ class suppliersRepository extends BaseRepository
         'phone',
         'fax',
         'contactPerson',
-        'email',
-        'createdDate',
-        'createdUserID',
-        'modifiedDate',
-        'modifiedUserID'
+        'email'
     ];
 
     /**

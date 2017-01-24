@@ -23,10 +23,6 @@ class CreatesuppliersTable extends Migration
             $table->string('fax');
             $table->string('contactPerson');
             $table->string('email');
-            $table->date('createdDate');
-            $table->integer('createdUserID');
-            $table->date('modifiedDate');
-            $table->string('modifiedUserID');
             $table->timestamps();
             $table->softDeletes();
         });

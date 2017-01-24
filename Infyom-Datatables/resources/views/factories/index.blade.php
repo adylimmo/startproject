@@ -15,6 +15,9 @@
         <div class="clearfix"></div>
         <div class="box box-primary">
             <div class="box-body">
+            <h1 class="pull-left">
+             <a class="btn btn-primary pull-left" style="margin-top: -10px;margin-bottom: 5px" href="{{url('/printgudang')}}" target="_blank">Print</a>
+         </h1>
                     @include('factories.table')
             </div>
         </div>

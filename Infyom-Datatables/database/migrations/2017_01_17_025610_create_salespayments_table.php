@@ -31,10 +31,6 @@ class CreatesalespaymentsTable extends Migration
             $table->text('note');
             $table->integer('staffID');
             $table->string('staffName');
-            $table->date('createdDate');
-            $table->integer('createdUserID');
-            $table->date('modifiedDate');
-            $table->integer('modifiedUserID');
             $table->timestamps();
             $table->softDeletes();
         });

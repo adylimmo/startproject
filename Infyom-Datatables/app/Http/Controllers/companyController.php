@@ -19,6 +19,7 @@ class companyController extends AppBaseController
     public function __construct(companyRepository $companyRepo)
     {
         $this->companyRepository = $companyRepo;
+        // $this->middleware('auth');
     }
 
     /**

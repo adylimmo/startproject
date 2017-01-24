@@ -17,11 +17,7 @@ class salesorderitemRepository extends BaseRepository
         'sku',
         'price',
         'qty',
-        'note',
-        'createdDate',
-        'createdUserID',
-        'modifiedDate',
-        'modifiedUserID'
+        'note'
     ];
 
     /**

@@ -30,11 +30,7 @@ class customersRepository extends BaseRepository
         'npwp',
         'pkpName',
         'category',
-        'status',
-        'createdDate',
-        'createdUserID',
-        'modifiedDate',
-        'modifiedUserID'
+        'status'
     ];
 
     /**

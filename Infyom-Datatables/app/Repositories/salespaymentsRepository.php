@@ -26,11 +26,7 @@ class salespaymentsRepository extends BaseRepository
         'ref',
         'note',
         'staffID',
-        'staffName',
-        'createdDate',
-        'createdUserID',
-        'modifiedDate',
-        'modifiedUserID'
+        'staffName'
     ];
 
     /**

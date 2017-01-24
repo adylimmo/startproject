@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,65 +9,27 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
 });
-
-
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('companies', 'companyController');
+});
 Auth::routes();
-
 Route::get('/home', 'HomeController@index');
-
-
-
-
-
-
-
-Route::resource('products', 'productController');
-
-
-
 Route::resource('stockProducts', 'stock_productsController');
-
 Route::resource('receives', 'receivesController');
-
-
-
-
-
-Route::resource('companies', 'companyController');
-
-
-
-
-
-
-
-
-
 Route::resource('purchasePrices', 'purchase_priceController');
-
 Route::resource('salesPrices', 'SalesPriceController');
-
 Route::resource('salesorderitems', 'salesorderitemController');
-
 Route::resource('salespayments', 'salespaymentsController');
+Route::get('/ajax-payment', 'salespaymentsController@ajaxGetNumber');
 
 Route::resource('customers', 'customersController');
-
-
-
 Route::resource('factories', 'factoriesController');
-
-Route::resource('products', 'productsController');
 Route::resource('salesorders', 'salesordersController');
 Route::get('/ajax-sales-order', 'salesordersController@ajaxGetNumber');
-
 Route::resource('suppliers', 'suppliersController');
-
-Route::resource('salesinvoices', 'salesinvoiceController');
 /*
 |--------------------------------------------------------------------------
 | Ajax Customer, Product Here
@@ -77,12 +38,20 @@ Route::resource('salesinvoices', 'salesinvoiceController');
 */
 Route::get('/ajax-customer', 'ajaxMasterController@ajaxcustomer');
 Route::get('/ajax-product', 'ajaxMasterController@ajaxproduct');
-
 /*
 |--------------------------------------------------------------------------
 | Example Print,
 |--------------------------------------------------------------------------
 |
 */
-Route::get('exportpdf', 'YourController@exportpdf');
-Route::get('printproducts', 'YourController@printproducts');
+Route::get('PrintBuktiPembayaran', 'PrintController@PrintBuktiPembayaran');
+Route::get('PrintSalesInvoice', 'PrintController@PrintSalesInvoice');
+Route::get('PrintSalesOrder', 'PrintController@PrintSalesOrder');
+/*
+|--------------------------------------------------------------------------
+| Example Print,
+|--------------------------------------------------------------------------
+|
+*/
+Route::resource('salesinvoices', 'salesinvoicesController');
+Route::resource('produks', 'produkController');

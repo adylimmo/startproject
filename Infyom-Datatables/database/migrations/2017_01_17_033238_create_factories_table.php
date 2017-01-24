@@ -20,10 +20,6 @@ class CreatefactoriesTable extends Migration
             $table->string('factoryType');
             $table->string('status');
             $table->text('note');
-            $table->date('createdDate');
-            $table->integer('createdUserID');
-            $table->date('modifiedDate');
-            $table->integer('modifiedUserID');
             $table->timestamps();
             $table->softDeletes();
         });

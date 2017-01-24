@@ -29,28 +29,7 @@
 </div>
 
 <!-- Createddate Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('createdDate', 'Createddate:') !!}
-    {!! Form::date('createdDate', null, ['class' => 'form-control']) !!}
-</div>
 
-<!-- Createduserid Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('createdUserID', 'Createduserid:') !!}
-    {!! Form::text('createdUserID', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Modifieddate Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('modifiedDate', 'Modifieddate:') !!}
-    {!! Form::date('modifiedDate', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Modifieduserid Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('modifiedUserID', 'Modifieduserid:') !!}
-    {!! Form::text('modifiedUserID', null, ['class' => 'form-control']) !!}
-</div>
 
 <!-- Submit Field -->
 <div class="form-group col-sm-12">

@@ -25,10 +25,6 @@ class CreatesalesordersTable extends Migration
             $table->date('needDate');
             $table->text('note');
             $table->integer('status');
-            $table->date('createdDate');
-            $table->integer('createdUserID');
-            $table->date('modifiedDate');
-            $table->integer('modifiedUserID');
             $table->timestamps();
             $table->softDeletes();
         });

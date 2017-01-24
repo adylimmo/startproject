@@ -53,7 +53,7 @@ class RegisterController extends Controller
             'username' => 'required|unique:users',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
-            'jabatan' => 'required',
+            'level' => 'required',
         ]);
     }
 
@@ -70,7 +70,7 @@ class RegisterController extends Controller
              'username' => $data['username'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'jabatan' => $data['jabatan'],
+            'level' => $data['level'],
         ]);
     }
 }

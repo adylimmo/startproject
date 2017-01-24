@@ -19,7 +19,6 @@ class salesorders extends Model
 
     protected $dates = ['deleted_at'];
 
-
     public $fillable = [
         'soNo',
         'customerID',
@@ -68,16 +67,8 @@ class salesorders extends Model
         'soNo' => 'required',
         'customerID' => 'numeric',
         'customerName' => 'required',
-        'customerAddress' => 'min:3',
-        'staffID' => 'numeric',
-        'staffName' => 'required',
         'orderDate' => 'date',
-        'needDate' => 'date',
-        'note' => 'min:3',
-        'createdDate' => 'date',
-        'createdUserID' => 'numeric',
-        'modifiedDate' => 'date',
-        'modifiedUserID' => 'numeric'
+        'needDate' => 'date'
     ];
 
     

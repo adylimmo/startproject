@@ -56,6 +56,8 @@ Route::resource('salesorders', 'salesordersAPIController');
 
 Route::resource('suppliers', 'suppliersAPIController');
 
-Route::resource('salesinvoices', 'salesinvoiceAPIController');
 
-Route::resource('products', 'productsAPIController');
+
+
+
+Route::resource('produks', 'produkAPIController');

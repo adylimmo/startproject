@@ -22,10 +22,6 @@ class CreatesalesorderitemsTable extends Migration
             $table->integer('price');
             $table->integer('qty');
             $table->text('note');
-            $table->date('createdDate');
-            $table->integer('createdUserID');
-            $table->date('modifiedDate');
-            $table->integer('modifiedUserID');
             $table->timestamps();
             $table->softDeletes();
         });

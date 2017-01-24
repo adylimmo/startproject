@@ -189,6 +189,7 @@ return [
         \InfyOm\AdminLTETemplates\AdminLTETemplatesServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Anouar\Fpdf\FpdfServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -244,7 +245,8 @@ return [
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
         'Flash'     => Laracasts\Flash\Flash::class,
-        'Fpdf' => Anouar\Fpdf\Facades\Fpdf::class ,
+        'Fpdf' => Anouar\Fpdf\Facades\Fpdf::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

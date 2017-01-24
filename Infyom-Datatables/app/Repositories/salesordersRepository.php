@@ -20,11 +20,7 @@ class salesordersRepository extends BaseRepository
         'orderDate',
         'needDate',
         'note',
-        'status',
-        'createdDate',
-        'createdUserID',
-        'modifiedDate',
-        'modifiedUserID'
+        'status'
     ];
 
     /**

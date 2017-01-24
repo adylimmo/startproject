@@ -19,6 +19,7 @@ class receivesController extends AppBaseController
     public function __construct(receivesRepository $receivesRepo)
     {
         $this->receivesRepository = $receivesRepo;
+        $this->middleware('auth');
     }
 
     /**

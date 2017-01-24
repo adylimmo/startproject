@@ -25,11 +25,7 @@ class receives extends Model
         'customerID',
         'invoiceTotal',
         'receiveTotal',
-        'refundTotal',
-        'createdDate',
-        'createdUserID',
-        'modifiedDate',
-        'modifiedUserID'
+        'refundTotal'
     ];
 
     /**
@@ -42,11 +38,7 @@ class receives extends Model
         'customerID' => 'integer',
         'invoiceTotal' => 'integer',
         'receiveTotal' => 'integer',
-        'refundTotal' => 'integer',
-        'createdDate' => 'date',
-        'createdUserID' => 'integer',
-        'modifiedDate' => 'date',
-        'modifiedUserID' => 'integer'
+        'refundTotal' => 'integer'
     ];
 
     /**
@@ -59,11 +51,7 @@ class receives extends Model
         'customerID' => 'numeric',
         'invoiceTotal' => 'numeric',
         'receiveTotal' => 'numeric',
-        'refundTotal' => 'numeric',
-        'createdDate' => 'date',
-        'createdUserID' => 'numeric',
-        'modifiedDate' => 'date',
-        'modifiedUserID' => 'numeric'
+        'refundTotal' => 'numeric'
     ];
 
     

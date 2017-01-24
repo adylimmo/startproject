@@ -19,6 +19,7 @@ class purchase_priceController extends AppBaseController
     public function __construct(purchase_priceRepository $purchasePriceRepo)
     {
         $this->purchasePriceRepository = $purchasePriceRepo;
+        $this->middleware('auth');
     }
 
     /**

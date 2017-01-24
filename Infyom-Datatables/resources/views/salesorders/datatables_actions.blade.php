@@ -1,15 +1,18 @@
 {!! Form::open(['route' => ['salesorders.destroy', $id], 'method' => 'delete']) !!}
 <div class='btn-group'>
-    <a href="{{ route('salesorders.show', $id) }}" class='btn btn-default btn-xs'>
-        <i class="glyphicon glyphicon-eye-open"></i>
+    <a href="{{ route('salesinvoices.create', 'soID=' .$id) }}" class='btn btn-default btn-xs' data-toggle="tooltip" data-placement="bottom" title="Buat Faktur Penjualan">
+        <i class="glyphicon glyphicon-file"></i>
     </a>
-    <a href="{{ route('salesorders.edit', $id) }}" class='btn btn-default btn-xs'>
+    <a href="{{ route('salesorders.show', $id) }}" class='btn btn-default btn-xs' data-toggle="tooltip" data-placement="bottom" title="Cetak Surat Jalan">
+        <i class="glyphicon glyphicon-print"></i>
+    </a>
+    <a href="{{ route('salesorders.edit', $id) }}" class='btn btn-default btn-xs' data-toggle="tooltip" data-placement="bottom" title="Ubah Pemesanan">
         <i class="glyphicon glyphicon-edit"></i>
     </a>
     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', [
         'type' => 'submit',
         'class' => 'btn btn-danger btn-xs',
-        'onclick' => "return confirm('Are you sure?')"
+        'onclick' => "return confirm('Yakin hapus pesanan ini?')"
     ]) !!}
 </div>
 {!! Form::close() !!}

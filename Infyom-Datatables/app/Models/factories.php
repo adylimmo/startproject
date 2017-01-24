@@ -25,11 +25,7 @@ class factories extends Model
         'factoryName',
         'factoryType',
         'status',
-        'note',
-        'createdDate',
-        'createdUserID',
-        'modifiedDate',
-        'modifiedUserID'
+        'note'
     ];
 
     /**
@@ -42,11 +38,7 @@ class factories extends Model
         'factoryName' => 'string',
         'factoryType' => 'string',
         'status' => 'string',
-        'note' => 'string',
-        'createdDate' => 'date',
-        'createdUserID' => 'integer',
-        'modifiedDate' => 'date',
-        'modifiedUserID' => 'integer'
+        'note' => 'string'
     ];
 
     /**
@@ -59,11 +51,7 @@ class factories extends Model
         'factoryName' => 'required',
         'factoryType' => 'required',
         'status' => 'required',
-        'note' => 'min:3',
-        'createdDate' => 'date',
-        'createdUserID' => 'numeric',
-        'modifiedDate' => 'date',
-        'modifiedUserID' => 'numeric'
+        'note' => 'min:3'
     ];
 
     

@@ -35,10 +35,6 @@ class CreatecustomersTable extends Migration
             $table->string('pkpName');
             $table->string('category');
             $table->string('status');
-            $table->date('createdDate');
-            $table->integer('createdUserID');
-            $table->date('modifiedDate');
-            $table->integer('modifiedUserID');
             $table->timestamps();
             $table->softDeletes();
         });

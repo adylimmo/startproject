@@ -5,6 +5,8 @@ namespace App\DataTables;
 use App\Models\salesorders;
 use Form;
 use Yajra\Datatables\Services\DataTable;
+use DB;
+use Auth;
 
 class salesordersDataTable extends DataTable
 {
@@ -28,7 +30,9 @@ class salesordersDataTable extends DataTable
     public function query()
     {
         $salesorders = salesorders::query();
-
+        /*$salesorders = DB::table('salesorders')
+            ->select('soNo', 'customerName', 'DATE_FORMAT("orderDate, %d-%m-%Y")', 'DATE_FORMAT("needDate, %d-%m-%Y")')
+            ->get();*/
         return $this->applyScopes($salesorders);
     }
 
@@ -41,14 +45,13 @@ class salesordersDataTable extends DataTable
     {
         return $this->builder()
             ->columns($this->getColumns())
-            ->addAction(['width' => '10%'])
+            ->addAction(['width' => '20%'])
             ->ajax('')
             ->parameters([
                 'dom' => 'Bfrtip',
                 'scrollX' => false,
                 'buttons' => [
-                    'print',
-                    'reset',
+                    // 'reset',
                     'reload',
                     [
                          'extend'  => 'collection',
@@ -58,8 +61,8 @@ class salesordersDataTable extends DataTable
                              'excel',
                              // 'pdf',
                          ],
+
                     ],
-                    'colvis'
                 ]
             ]);
     }
@@ -72,20 +75,11 @@ class salesordersDataTable extends DataTable
     private function getColumns()
     {
         return [
-            'soNo' => ['name' => 'soNo', 'data' => 'soNo'],
-            // 'customerID' => ['name' => 'customerID', 'data' => 'customerID'],
-            'customerName' => ['name' => 'customerName', 'data' => 'customerName'],
-            // 'customerAddress' => ['name' => 'customerAddress', 'data' => 'customerAddress'],
-            // 'staffID' => ['name' => 'staffID', 'data' => 'staffID'],
-            'staffName' => ['name' => 'staffName', 'data' => 'staffName'],
-            'orderDate' => ['name' => 'orderDate', 'data' => 'orderDate'],
-            'needDate' => ['name' => 'needDate', 'data' => 'needDate']
-            // 'note' => ['name' => 'note', 'data' => 'note'],
-            // 'status' => ['name' => 'status', 'data' => 'status'],
-            // 'createdDate' => ['name' => 'createdDate', 'data' => 'createdDate'],
-            // 'createdUserID' => ['name' => 'createdUserID', 'data' => 'createdUserID'],
-            // 'modifiedDate' => ['name' => 'modifiedDate', 'data' => 'modifiedDate'],
-            // 'modifiedUserID' => ['name' => 'modifiedUserID', 'data' => 'modifiedUserID']
+            'Pemesanan' => ['name' => 'soNo', 'data' => 'soNo'],
+            'Customer' => ['name' => 'customerName', 'data' => 'customerName'],
+            'Tanggal Pesan' => ['name' => 'orderDate', 'data' => 'orderDate'],
+            'Tanggal Dibutuhkan' => ['name' => 'needDate', 'data' => 'needDate'],
+            'Status' => ['name' => 'statusText', 'data' => 'statusText']
         ];
     }
 

@@ -47,7 +47,6 @@ class companyDataTable extends DataTable
                 'dom' => 'Bfrtip',
                 'scrollX' => false,
                 'buttons' => [
-                    'print',
                     'reset',
                     'reload',
                     [
@@ -58,8 +57,7 @@ class companyDataTable extends DataTable
                              'excel',
                              // 'pdf',
                          ],
-                    ],
-                    'colvis'
+                    ]
                 ]
             ]);
     }
@@ -74,13 +72,9 @@ class companyDataTable extends DataTable
         return [
             
             'NAMA PERUSAHAAN' => ['name' => 'companyName', 'data' => 'companyName'],
-            // 'contactPerson' => ['name' => 'contactPerson', 'data' => 'contactPerson'],
             'ALAMAT' => ['name' => 'address', 'data' => 'address'],
-            // 'village' => ['name' => 'village', 'data' => 'village'],
-            // 'city' => ['name' => 'city', 'data' => 'city'],
-            // 'zipcode' => ['name' => 'zipcode', 'data' => 'zipcode'],
-            // 'province' => ['name' => 'province', 'data' => 'province'],
-            // 'phone' => ['name' => 'phone', 'data' => 'phone'],
+            'KONTAK' => ['name' => 'contactPerson', 'data' => 'contactPerson'],
+            'TELP' => ['name' => 'phone', 'data' => 'phone'],
             'FAX' => ['name' => 'fax', 'data' => 'fax']
         ];
     }

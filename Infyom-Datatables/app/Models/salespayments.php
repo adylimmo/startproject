@@ -33,7 +33,6 @@ class salespayments extends Model
         'customerID',
         'customerName',
         'customerAddress',
-        'ref',
         'note',
         'staffID',
         'staffName',
@@ -61,14 +60,9 @@ class salespayments extends Model
         'customerID' => 'integer',
         'customerName' => 'string',
         'customerAddress' => 'string',
-        'ref' => 'string',
         'note' => 'string',
         'staffID' => 'integer',
-        'staffName' => 'string',
-        'createdDate' => 'date',
-        'createdUserID' => 'integer',
-        'modifiedDate' => 'date',
-        'modifiedUserID' => 'integer'
+        'staffName' => 'string'
     ];
 
     /**
@@ -80,23 +74,8 @@ class salespayments extends Model
         'paymentNo' => 'required',
         'invoiceID' => 'numeric',
         'paymentDate' => 'date',
-        'payType' => 'required',
-        'bankNo' => 'required',
-        'bankName' => 'required',
-        'bankAC' => 'required',
         'effectiveDate' => 'date',
-        'total' => 'numeric',
-        'customerID' => 'numeric',
-        'customerName' => 'required',
-        'customerAddress' => 'min:5',
-        'ref' => 'required',
-        'note' => 'min:5',
-        'staffID' => 'numeric',
-        'staffName' => 'required',
-        'createdDate' => 'date',
-        'createdUserID' => 'numeric',
-        'modifiedDate' => 'date',
-        'modifiedUserID' => 'numeric'
+        'customerID' => 'required'
     ];
 
     

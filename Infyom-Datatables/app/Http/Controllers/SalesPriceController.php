@@ -8,6 +8,7 @@ use App\Http\Requests\CreateSalesPriceRequest;
 use App\Http\Requests\UpdateSalesPriceRequest;
 use App\Repositories\SalesPriceRepository;
 use Flash;
+use DB;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
@@ -19,6 +20,7 @@ class SalesPriceController extends AppBaseController
     public function __construct(SalesPriceRepository $salesPriceRepo)
     {
         $this->salesPriceRepository = $salesPriceRepo;
+        $this->middleware('auth');
     }
 
     /**
@@ -70,14 +72,18 @@ class SalesPriceController extends AppBaseController
     public function show($id)
     {
         $salesPrice = $this->salesPriceRepository->findWithoutFail($id);
-
+        $data = DB::table('sales_prices')
+        ->join('customers','sales_prices.customerID','=','customers.id')
+        ->select('customers.*','sales_prices.*')
+        ->where('sales_prices.id',$id)->get();
+        dd($data);
         if (empty($salesPrice)) {
             Flash::error('Sales Price not found');
 
             return redirect(route('salesPrices.index'));
         }
 
-        return view('sales_prices.show')->with('salesPrice', $salesPrice);
+        return view('sales_prices.show', compact('salesPrice','data'));
     }
 
     /**

@@ -59,13 +59,46 @@ class produkController extends AppBaseController
      */
     public function store(CreateprodukRequest $request)
     {
-        $input = $request->all();
+        $cek = DB::table('products')
+            ->where('productCode',$request->input('productCode'))
+            ->select('id')->get();
+        if($cek->count() === 0)
+        {
+            $newproduk = $id = DB::table('products')->insertGetId(
+                ['productCode' => $request->input('productCode'),
+                    'productName' => $request->input('productName'),
+                    'unit' => $request->input('unit'),
+                    'unitText' => ($request->input('unit') == '1'? 'PCS': ($request->input('unit') == '2'? 'SET' : 'LSN')),
+                    'status' => $request->input('status')]
+            );
+            if($newproduk > 0)
+            {
+                $harga = $request->input('harga');
+                $cust = $request->input('custid');
+                $dataInsert = [];
+                for($k = 0; $k<count($cust); $k++)
+                {
+                    if($harga[$k] > 0) {
+                        $dataInsert[] = array(
+                            'customerID' => $cust[$k],
+                            'productID' => $id,
+                            'productCode' => $request->input('productCode'),
+                            'price' => $harga[$k]);
+                    }
+                }
+                if(count($dataInsert) > 0)
+                {
+                    DB::table('sales_prices')->insert($dataInsert);
+                }
+            }
 
-        $produk = $this->produkRepository->create($input);
-
-        Flash::success('Produk tersimpan.');
-
-        return redirect(route('produks.index'));
+            Flash::success('Produk tersimpan.');
+            return redirect(route('produks.index'));
+        }else
+        {
+            Flash::error('SKU Sudah ada, silahkan gunakan SKU lain!.');
+            return redirect(route('produks.create'));
+        }
     }
 
     /**
@@ -105,13 +138,25 @@ class produkController extends AppBaseController
             return redirect(route('produks.index'));
         }
 
-        $customer = DB::table('sales_prices')
-            ->leftJoin('customers', 'customers.id', '=', 'sales_prices.customerID')
-            ->where('sales_prices.productID', $id)
-            ->select('customers.customerName','sales_prices.*')
+        $harga = array();
+        $customer = DB::table('customers')
+            ->select('id', 'customerName')
             ->get();
-
-        return view('produks.edit', compact('id', 'produk', 'customer'));
+        foreach($customer as $customer)
+        {
+            $cusprice = DB::table('sales_prices')
+                ->where('customerID', $customer->id)
+                ->where('productID', $id)
+                ->select('id', 'price')
+                ->get();
+            if($cusprice->count() === 0){
+                $harga[] = array('customerName' => $customer->customerName, 'customerID' => $customer->id, 'priceID' => '0', 'price' => '0');
+            }else{
+                $cusprice = $cusprice->first();
+                $harga[] = array('customerName' => $customer->customerName, 'customerID' => $customer->id, 'priceID' => $cusprice->id, 'price' => $cusprice->price);
+            }
+        }
+        return view('produks.edit', compact('id', 'produk', 'harga'));
     }
 
     /**
@@ -132,10 +177,44 @@ class produkController extends AppBaseController
             return redirect(route('produks.index'));
         }
 
-        $produk = $this->produkRepository->update($request->all(), $id);
+        $arProduk = array(
+            '_method' => $request->input('_method'),
+            '_token' => $request->input('_token'),
+            'productCode' => $request->input('productCode'),
+            'productName' => $request->input('productName'),
+            'unit' => $request->input('unit'),
+            'unitText' => ($request->input('unit') == '1'? 'PCS': ($request->input('unit') == '2'? 'SET' : 'LSN')),
+            'status' => $request->input('status')
+        );
+        $update = $this->produkRepository->update($arProduk, $id);
 
+        $harga = $request->input('harga');
+        $cust = $request->input('custid');
+        $hid = $request->input('priceid');
+        $dataInsert = [];
+        for($k = 0; $k<count($cust); $k++)
+        {
+            if($harga[$k] > 0) {
+                if ($hid[$k] > 0) {
+                    //update
+                    DB::table('sales_prices')
+                        ->where('id', $hid[$k])
+                        ->update(['productCode' => $arProduk['productCode'],'price' => $harga[$k]]);
+                } else {
+                    //insert
+                    $dataInsert[] = array(
+                        'customerID' => $cust[$k],
+                        'productID' => $id,
+                        'productCode' => $arProduk['productCode'],
+                        'price' => $harga[$k]);
+                }
+            }
+        }
+        if(count($dataInsert) > 0)
+        {
+            DB::table('sales_prices')->insert($dataInsert);
+        }
         Flash::success('Produk berhasil diubah.');
-
         return redirect(route('produks.index'));
     }
 
@@ -161,5 +240,25 @@ class produkController extends AppBaseController
         Flash::success('Produk berhasil dihapus.');
 
         return redirect(route('produks.index'));
+    }
+
+    public function cekproduct()
+    {
+        DB::enableQueryLog();
+        $code = @$_GET['code'];
+
+        $hasil = DB::table('products')
+            ->where('productCode',$code)
+            ->select('id')->get();
+
+        $res['total'] = $hasil->count();
+        if($hasil->count() === 0){
+            $res['message'] = '';
+        }else{
+            $res['message'] = 'SKU Sudah ada, silahkan gunakan SKU lainya!';
+        }
+
+        echo json_encode($res);
+        //dd(DB::getQueryLog());
     }
 }

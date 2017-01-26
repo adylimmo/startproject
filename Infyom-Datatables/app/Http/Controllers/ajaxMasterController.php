@@ -116,6 +116,7 @@ class ajaxMasterController extends AppBaseController
             ->join('sales_prices', 'sales_prices.productID', '=', 'products.id')
             ->join('customers', 'customers.id', '=', 'sales_prices.customerID')
             ->where('products.status','1')
+            ->where('sales_prices.price','>', '0')
             ->where(function($query) use ($search){
                 $query
                 ->where('products.productCode','LIKE','%'.$search.'%')

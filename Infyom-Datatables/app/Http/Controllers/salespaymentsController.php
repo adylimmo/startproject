@@ -60,122 +60,129 @@ class salespaymentsController extends AppBaseController
     public function store(CreatesalespaymentsRequest $request)
     {
         $input = $request->all();
-        $paymentDate = $request->input('paymentDate');
-        $paymentNo = $request->input('paymentNo');
-        $payType = $request->input('payType');
-        $bankNo = $request->input('bankNo');
-        $bankName = $request->input('bankName');
-        $effectiveDate = $request->input('effectiveDate');
-        $bankAC = $request->input('bankAC');
-        $customerID = $request->input('customerID');
-        $customerLabel = $request->input('customerLabel');
-        $customerAddress = $request->input('customerAddress');
-        $note = $request->input('note');
-        $amountpaid = $request->input('amountpaid');
-        $amountid = $request->input('amountid');
-        $totalPaid = $request->input('totalPaid');
+        $paymentDate = @$request->input('paymentDate');
+        $paymentNo = @$request->input('paymentNo');
+        $payType = @$request->input('payType');
+        $bankNo = @$request->input('bankNo');
+        $bankName = @$request->input('bankName');
+        $effectiveDate = @$request->input('effectiveDate');
+        $bankAC = @$request->input('bankAC');
+        $customerID = @$request->input('customerID');
+        $customerLabel = @$request->input('customerLabel');
+        $customerAddress = @$request->input('customerAddress');
+        $note = @$request->input('note');
+        $amountpaid = @$request->input('amountpaid');
+        $amountid = @$request->input('amountid');
+        $totalPaid = @$request->input('totalPaid');
 
-        /*** cari data staff ***/
-        $staffID = Auth::user()->id;
-        $staffName = Auth::user()->name;
-        /*** cek nomor faktur ***/
-        $order = DB::table('salespayments')
-        ->where('paymentNo', $paymentNo)
-        ->select('id')
-        ->get();
-
-        if($order->count() === 0)
+        if($totalPaid > 0)
         {
-            $paymentNo = $paymentNo;
-        }else
-        {
-            $expCode = explode("/", $paymentNo);
-            $hasil = DB::table('salespayments')
-            ->where('customerID',$customerID)
-            ->select('paymentNo')
-            ->orderBy('id', 'desc')->limit(1)->get();
-            $res = $hasil->first();
-            $exp = explode("/", $res->paymentNo);
-            $lastNo = ltrim($exp[2], "0");
-            $paymentNo = "PAY/" . $exp[1] . "/" . str_pad($lastNo+1, 5, "0", STR_PAD_LEFT);
-        }
+            /*** cari data staff ***/
+            $staffID = Auth::user()->id;
+            $staffName = Auth::user()->name;
+            /*** cek nomor faktur ***/
+            $order = DB::table('salespayments')
+            ->where('paymentNo', $paymentNo)
+            ->select('id')
+            ->get();
 
-        /*** save payment ***/
-        $paymentID = DB::table('salespayments')->insertGetId([
-            'paymentNo' => $paymentNo,
-            'customerID' => $customerID,
-            'customerName' => $customerLabel,
-            'customerAddress' => $customerAddress,
-            'paymentDate' => $this->convert_date($paymentDate),
-            'effectiveDate' => ($effectiveDate != '' ? $this->convert_date($effectiveDate): date('Y-m-d')),
-            'payType' => $payType,
-            'bankNo' => $bankNo,
-            'bankName' => $bankName,
-            'bankAC' => $bankAC,
-            'total' => $totalPaid,
-            'note' => $note,
-            'staffID' => $staffID,
-            'staffName' => $staffName
-            ]);
-
-        if(intval($paymentID) > 0)
-        {
-            /** save sales order detail */
-            $dataInsert = [];
-            $totalPayment = 0;
-            for($k = 0; $k<count($amountid); $k++)
+            if($order->count() === 0)
             {
-                /** cek invoice **/
-                $invCek = DB::table('salesinvoices')
-                ->where('id', $amountid[$k])
-                ->select('invoiceNo', 'amountPaid', 'grandtotal')
-                ->get()->first();
-
-                if($amountpaid[$k] > 0)
-                {
-                    $dataInsert[] = array('paidID' => $paymentID,
-                        'invoiceID' => $amountid[$k],
-                        'invoiceNo' => $invCek->invoiceNo,
-                        'amountPaid' => $amountpaid[$k]);
-
-                    /** Cek Ptotal Invoice **/
-                    if($invCek->grandtotal <= ($invCek->amountPaid + $amountpaid[$k]))
-                    {
-                        $invStat = '3'; $invStattext = 'Lunas';
-                    }else
-                    {
-                        $invStat = '2'; $invStattext = 'Dibayar Sebagian';
-                    }
-
-                    /** ubah faktur penjualan **/
-                    DB::table('salesinvoices')
-                    ->where('id', $amountid[$k])
-                    ->update(['status' => $invStat, 'statusText' => $invStattext, 'amountPaid' => $invCek->amountPaid + $amountpaid[$k]]);
-                    $totalPayment += $amountpaid[$k];
-                }
+                $paymentNo = $paymentNo;
+            }else
+            {
+                $expCode = explode("/", $paymentNo);
+                $hasil = DB::table('salespayments')
+                ->where('customerID',$customerID)
+                ->select('paymentNo')
+                ->orderBy('id', 'desc')->limit(1)->get();
+                $res = $hasil->first();
+                $exp = explode("/", $res->paymentNo);
+                $lastNo = ltrim($exp[2], "0");
+                $paymentNo = "PAY/" . $exp[1] . "/" . str_pad($lastNo+1, 5, "0", STR_PAD_LEFT);
             }
 
-            /*** simpan detail pembayaran ***/
-            DB::table('paymentdetail')->insert($dataInsert);
+            /*** save payment ***/
+            $paymentID = DB::table('salespayments')->insertGetId([
+                'paymentNo' => $paymentNo,
+                'customerID' => $customerID,
+                'customerName' => $customerLabel,
+                'customerAddress' => $customerAddress,
+                'paymentDate' => $this->convert_date($paymentDate),
+                'effectiveDate' => ($effectiveDate != '' ? $this->convert_date($effectiveDate): date('Y-m-d')),
+                'payType' => $payType,
+                'bankNo' => $bankNo,
+                'bankName' => $bankName,
+                'bankAC' => $bankAC,
+                'total' => $totalPaid,
+                'note' => $note,
+                'staffID' => $staffID,
+                'staffName' => $staffName
+                ]);
 
-            /** ubah total pembayaran **/
-            DB::table('salespayments')
-            ->where('id', $paymentID)
-            ->update(['total' => $totalPayment]);
+            if(intval($paymentID) > 0) {
+                /** save sales order detail */
+                $dataInsert = [];
+                $totalPayment = 0;
+                for ($k = 0; $k < count($amountid); $k++) {
+                    /** cek invoice **/
+                    $invCek = DB::table('salesinvoices')
+                        ->where('id', $amountid[$k])
+                        ->select('invoiceNo', 'amountPaid', 'grandtotal')
+                        ->get()->first();
 
-            /*** simpan aksi ke tabel log Admin ***/
-            Flash::success('Pembayaran tersimpan.');
-            return redirect(route('salespayments.index'));
+                    if ($amountpaid[$k] > 0) {
+                        $dataInsert[] = array('paidID' => $paymentID,
+                            'invoiceID' => $amountid[$k],
+                            'invoiceNo' => $invCek->invoiceNo,
+                            'amountPaid' => $amountpaid[$k]);
+
+                        /** Cek Ptotal Invoice **/
+                        if ($invCek->grandtotal <= ($invCek->amountPaid + $amountpaid[$k])) {
+                            $invStat = '3';
+                            $invStattext = 'Lunas';
+                        } else {
+                            $invStat = '2';
+                            $invStattext = 'Dibayar Sebagian';
+                        }
+
+                        /** ubah faktur penjualan **/
+                        DB::table('salesinvoices')
+                            ->where('id', $amountid[$k])
+                            ->update(['status' => $invStat, 'statusText' => $invStattext, 'amountPaid' => $invCek->amountPaid + $amountpaid[$k]]);
+                        $totalPayment += $amountpaid[$k];
+                    }
+                }
+
+                if ($totalPayment > 0) {
+                    /*** simpan detail pembayaran ***/
+                    DB::table('paymentdetail')->insert($dataInsert);
+
+                    /** ubah total pembayaran **/
+                    DB::table('salespayments')
+                        ->where('id', $paymentID)
+                        ->update(['total' => $totalPayment]);
+
+                    /*** simpan aksi ke tabel log Admin ***/
+                    Flash::success('Pembayaran tersimpan.');
+                } else {
+                    /** hapus Pembayaran */
+                    DB::table('salespayments')->where('id', $paymentID)->delete();
+                    Flash::error('Pembayaran gagal disimpan.');
+                }
+            }else
+            {
+                Flash::error('Total Pembayaran tidak boleh "0"');
+                return redirect(route('salespayments.create'));
+            }
         }else
         {
-            /** hapus sales order */
-            DB::table('salespayments')->where('id', $paymentID)->delete();
             Flash::error('Pembayaran gagal disimpan!');
+            return redirect(route('salespayments.create'));
         }
+
         //$salespayments = $this->salespaymentsRepository->create($input);
-
         //Flash::success('Salespayments saved successfully.');
-
         //return redirect(route('salespayments.index'));
     }
 
@@ -186,21 +193,7 @@ class salespaymentsController extends AppBaseController
      *
      * @return Response
      */
-    public function shows($id)
-    {
-        $salespayments = $this->salespaymentsRepository->findWithoutFail($id);
 
-        if (empty($salespayments)) {
-            Flash::error('Faktur Pembayaran tidak ditemukan');
-
-            return redirect(route('salespayments.index'));
-        }
-
-        $namakantor = company::all();
-        $pdf = new Fpdf();
-        $pdf::Output('bukti_pembayaran.pdf','I'); 
-        exit;
-    }
     public function show($id)
     {
         /** Cetak PEsanan disini */
@@ -213,8 +206,13 @@ class salespaymentsController extends AppBaseController
             return redirect(route('salespayments.index'));
         }
 
-        $pdf = PDF::loadView('prints.print_buktibayar',compact('salespayments','no'));
-        $pdf->setPaper(array(0,0,520,750), 'landscape');
+        $paydetail = DB::table('paymentdetail')
+            ->where('paidID' , '=', $id)
+            ->select('invoiceNo', 'amountPaid')
+            ->get();
+
+        $pdf = PDF::loadView('prints.print_buktibayar',compact('salespayments','no', 'paydetail'));
+        $pdf->setPaper(array(0,0,500,750), 'landscape');
         return $pdf->stream('file_PAYOUT.pdf');
     }
 
@@ -421,6 +419,7 @@ class salespaymentsController extends AppBaseController
 
             $inv = DB::table('salesinvoices')
             ->where('customerID', $custid)
+            ->whereColumn('amountPaid', '<', 'grandtotal')
             ->select('*')
             ->orderBy('invoiceNo', 'asc')->get();
 

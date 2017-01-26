@@ -75,7 +75,8 @@ class salespayments extends Model
         'invoiceID' => 'numeric',
         'paymentDate' => 'date',
         'effectiveDate' => 'date',
-        'customerID' => 'required'
+        'customerID' => 'required',
+        'totalPaid' => 'min:1'
     ];
 
     

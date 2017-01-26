@@ -2,10 +2,7 @@
 
 @section('content')
     <section class="content-header">
-        <h1 class="pull-left">Sales Prices</h1>
-        <h1 class="pull-right">
-           <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('salesPrices.create') !!}">Add New</a>
-        </h1>
+        <h1 class="pull-left">Harga Jual Produk</h1>
     </section>
     <div class="content">
         <div class="clearfix"></div>
@@ -15,9 +12,6 @@
         <div class="clearfix"></div>
         <div class="box box-primary">
             <div class="box-body">
-            <h1 class="pull-left">
-             <a class="btn btn-primary pull-left" style="margin-top: -10px;margin-bottom: 5px" href="{{url('/printsalesprice')}}">Print</a>
-         </h1>
                     @include('sales_prices.table')
             </div>
         </div>

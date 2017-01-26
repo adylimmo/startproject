@@ -106,6 +106,7 @@
     </section>
     <div class="content">
         @include('adminlte-templates::common.errors')
+        @include('flash::message')
         <div class="box box-primary">
 
             <div class="box-body">
@@ -113,7 +114,7 @@
                     {!! Form::open(['route' => 'salespayments.store', 'name' => 'frmPayment', 'id' => 'frmPayment']) !!}
                     <div class="form-group col-sm-3">
                         {!! Form::label('paymentDate', 'Tanggal Faktur:') !!}
-                        {!! Form::date('paymentDate', $tanggal, ['class' => 'form-control input-large']) !!}
+                        {!! Form::text('paymentDate', $tanggal, ['class' => 'form-control input-large']) !!}
                     </div>
                     <div class="form-group col-sm-9">
                         {!! Form::label('paymentNo', 'Nomor Faktur Pembayaran:') !!}
@@ -135,7 +136,7 @@
                     </div>
                     <div class="form-group col-sm-3">
                         {!! Form::label('effectiveDate', 'Tanggal Efektif:') !!}
-                        {!! Form::date('effectiveDate', null, ['class' => 'form-control input-large']) !!}
+                        {!! Form::text('effectiveDate', null, ['class' => 'form-control input-large']) !!}
                     </div>
                     <div class="form-group col-sm-6">
                         {!! Form::label('bankAC', 'Nama Pemilik Rekening:') !!}
@@ -173,8 +174,8 @@
                                         <th colspan="2" style="text-align: right;">Total</th>
                                         <th>RP&nbsp;&nbsp;<span id="tInvoice">0</span></th>
                                         <th></th>
-                                        <th>RP&nbsp;&nbsp;<span id="tPaid"></span>
-                                        <input type="hidden" name="totalPaid" id="totalPaid"></th>
+                                        <th>RP&nbsp;&nbsp;<span id="tPaid">0</span>
+                                        <input type="hidden" name="totalPaid" id="totalPaid" value="0"></th>
                                     </tr>
                                 </tfoot>
                             </table>

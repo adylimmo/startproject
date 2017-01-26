@@ -190,6 +190,7 @@ return [
         Yajra\Datatables\DatatablesServiceProvider::class,
         Anouar\Fpdf\FpdfServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -247,6 +248,7 @@ return [
         'Flash'     => Laracasts\Flash\Flash::class,
         'Fpdf' => Anouar\Fpdf\Facades\Fpdf::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 

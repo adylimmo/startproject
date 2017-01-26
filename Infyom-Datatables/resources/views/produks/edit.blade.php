@@ -46,14 +46,15 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        @foreach ($customer as $customer)
-                        <div class="form-group col-sm-12">
-                            <label for="harga{{ $customer->customerID }}" class="col-sm-4 control-label">Harga {{ $customer->customerName }}</label>
-                            <div class="col-sm-8">
-                                <input type="text" name="harga[]" id="harga{{ $customer->customerID }}" value="{{ $customer->price }}" class="form-control input-medium">
-                                <input type="hidden" name="custid[]" value="{{ $customer->customerID }}">
+                        @foreach ($harga as $key=>$value)
+                            <div class="form-group col-sm-12">
+                                <label for="harga{{ $value['customerID'] }}" class="col-sm-4 control-label">Harga {{ $value['customerName'] }}</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="harga[]" id="harga{{ $value['customerID'] }}" value="{{ number_format($value['price'], 0, '','') }}" class="form-control input-medium">
+                                    <input type="hidden" name="custid[]" value="{{ $value['customerID'] }}">
+                                    <input type="hidden" name="priceid[]" value="{{ $value['priceID'] }}">
+                                </div>
                             </div>
-                        </div>
                         @endforeach
                     </div>
                     <!-- Submit Field -->

@@ -27,6 +27,10 @@
             <a href="{!! route('salesPrices.index') !!}"><i class="fa fa-angle-double-right"></i><span>Harga Produk</span></a>
         </li>
 
+        <li class="{{ Request::is('ImportExport') ? 'active' : '' }}">
+            <a href="{{url('/importExport')}}"><i class="fa fa-angle-double-right"></i><span>Cek Update</span></a>
+        </li>
+
     </ul>
 </li>
 @endif

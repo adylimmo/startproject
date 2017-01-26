@@ -2,6 +2,7 @@
 
 namespace App\DataTables;
 
+use App\Models\customers;
 use App\Models\SalesPrice;
 use Form;
 use Yajra\Datatables\Services\DataTable;
@@ -27,9 +28,9 @@ class SalesPriceDataTable extends DataTable
      */
     public function query()
     {
-        $salesPrices = SalesPrice::query();
+        $customers = customers::query();
 
-        return $this->applyScopes($salesPrices);
+        return $this->applyScopes($customers);
     }
 
     /**
@@ -41,14 +42,12 @@ class SalesPriceDataTable extends DataTable
     {
         return $this->builder()
             ->columns($this->getColumns())
-            ->addAction(['width' => '10%'])
+            ->addAction(['width' => '20%'])
             ->ajax('')
             ->parameters([
                 'dom' => 'Bfrtip',
                 'scrollX' => false,
                 'buttons' => [
-                    // 'print',
-                    'reset',
                     'reload',
                     [
                          'extend'  => 'collection',
@@ -58,8 +57,7 @@ class SalesPriceDataTable extends DataTable
                              'excel',
                              // 'pdf',
                          ],
-                    ],
-                    'colvis'
+                    ]
                 ]
             ]);
     }
@@ -72,10 +70,7 @@ class SalesPriceDataTable extends DataTable
     private function getColumns()
     {
         return [
-            'customerID' => ['name' => 'customerID', 'data' => 'customerID'],
-            'productID' => ['name' => 'productID', 'data' => 'productID'],
-            'productCode' => ['name' => 'productCode', 'data' => 'productCode'],
-            'price' => ['name' => 'price', 'data' => 'price']
+            'Customer' => ['name' => 'customerName', 'data' => 'customerName']
         ];
     }
 

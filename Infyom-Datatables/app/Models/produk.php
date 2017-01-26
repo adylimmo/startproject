@@ -23,8 +23,7 @@ class produk extends Model
     public $fillable = [
         'productCode',
         'productName',
-        'unit',
-        'note',
+        'unitText',
         'status'
     ];
 
@@ -37,7 +36,6 @@ class produk extends Model
         'productCode' => 'string',
         'productName' => 'string',
         'unit' => 'integer',
-        'note' => 'string',
         'status' => 'string'
     ];
 
@@ -49,8 +47,7 @@ class produk extends Model
     public static $rules = [
         'productCode' => 'required',
         'productName' => 'required',
-        'unit' => 'numeric',
-        'note' => 'min:5'
+        'unit' => 'numeric'
     ];
 
     

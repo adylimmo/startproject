@@ -14,9 +14,6 @@ class produkRepository extends BaseRepository
         'productCode',
         'productName',
         'unit',
-        'note',
-        'stock',
-        'image',
         'status'
     ];
 

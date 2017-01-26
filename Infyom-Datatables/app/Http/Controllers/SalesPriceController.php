@@ -72,18 +72,18 @@ class SalesPriceController extends AppBaseController
     public function show($id)
     {
         $salesPrice = $this->salesPriceRepository->findWithoutFail($id);
-        $data = DB::table('sales_prices')
+        $datanama = DB::table('sales_prices')
         ->join('customers','sales_prices.customerID','=','customers.id')
         ->select('customers.*','sales_prices.*')
         ->where('sales_prices.id',$id)->get();
-        dd($data);
+        //dd($datanama);
         if (empty($salesPrice)) {
             Flash::error('Sales Price not found');
 
             return redirect(route('salesPrices.index'));
         }
 
-        return view('sales_prices.show', compact('salesPrice','data'));
+        return view('sales_prices.show', compact('salesPrice','datanama'));
     }
 
     /**
@@ -95,15 +95,41 @@ class SalesPriceController extends AppBaseController
      */
     public function edit($id)
     {
+        /*$customer = DB::table('customers')
+            ->where('id', $id)
+            ->select('id', 'customerCode', 'customerName')
+            ->get();
+
+        if($customer->count() === 0)
+        {
+            Flash::error('Customer tidak ditemukan');
+            return redirect(route('salesPrices.index'));
+        }
+
+        $customer = $customer->first();
+        $harga = DB::table('sales_prices')
+            ->leftJoin('products', 'products.id', '=', 'sales_prices.productID')
+            ->where('sales_prices.customerID', $id)
+            ->select('sales_prices.*', 'products.productName')
+            ->get();
+
+        return view('sales_prices.edit', compact('customer', 'harga'));
+        */
+
         $salesPrice = $this->salesPriceRepository->findWithoutFail($id);
 
         if (empty($salesPrice)) {
-            Flash::error('Sales Price not found');
+            Flash::error('Customer Tidak ditemukan');
 
             return redirect(route('salesPrices.index'));
         }
 
-        return view('sales_prices.edit')->with('salesPrice', $salesPrice);
+        $harga = DB::table('products')
+            ->leftJoin('sales_prices', 'sales_prices.productID', '=', 'products.id')
+            ->where('sales_prices.customerID', $id)
+            ->select('sales_prices.*', 'products.productName')
+            ->get();
+        return view('sales_prices.edit', compact('salesPrice', 'harga'));
     }
 
     /**

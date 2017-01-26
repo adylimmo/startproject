@@ -1,3 +1,8 @@
+@extends('layouts.head_ofice')
+@section('titel')
+{{$salesorders->soNo}}
+@endsection
+@section('content')
 <table cellpadding='0' cellspacing='0' style='font-family:sans-serif; margin-top:-35px; margin-left: -20px; margin-right: -20px; width: 240mm;'>
     <tr valign='top'>
         <td style='width: 150mm;' valign='middle'>
@@ -72,3 +77,4 @@
                 </td>
             </tr>
         </table>
+        @endsection

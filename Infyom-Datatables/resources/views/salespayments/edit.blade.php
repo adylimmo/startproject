@@ -99,7 +99,7 @@
                    {!! Form::model($salespayments, ['route' => ['salespayments.update', $salespayments->id], 'method' => 'patch', 'name' => 'frmPayment', 'id' => 'frmPayment']) !!}
                    <div class="form-group col-sm-3">
                         {!! Form::label('paymentDate', 'Tanggal Faktur:') !!}
-                        {!! Form::date('paymentDate', $dataBayar['paymentDate'], ['class' => 'form-control input-large']) !!}
+                        {!! Form::text('paymentDate', $dataBayar['paymentDate'], ['class' => 'form-control input-large']) !!}
                     </div>
                     <div class="form-group col-sm-9">
                         {!! Form::label('paymentNo', 'Nomor Faktur Pembayaran:') !!}
@@ -121,7 +121,7 @@
                     </div>
                     <div class="form-group col-sm-3">
                         {!! Form::label('effectiveDate', 'Tanggal Efektif:') !!}
-                        {!! Form::date('effectiveDate', $dataBayar['effectiveDate'], ['class' => 'form-control input-large']) !!}
+                        {!! Form::text('effectiveDate', $dataBayar['effectiveDate'], ['class' => 'form-control input-large']) !!}
                     </div>
                     <div class="form-group col-sm-6">
                         {!! Form::label('bankAC', 'Nama Pemilik Rekening:') !!}
@@ -173,7 +173,7 @@
                                 <tfoot>
                                     <tr>
                                         <th colspan="4" style="text-align: right;">Total</th>
-                                        <th>RP&nbsp;&nbsp;<span id="tPaid"></span>
+                                        <th>RP&nbsp;&nbsp;<span id="tPaid">0</span>
                                         <input type="hidden" name="totalPaid" id="totalPaid" value="{{ $dataBayar['total'] }}"></th>
                                     </tr>
                                 </tfoot>

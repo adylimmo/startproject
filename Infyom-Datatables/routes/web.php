@@ -55,3 +55,10 @@ Route::get('PrintSalesOrder', 'PrintController@PrintSalesOrder');
 */
 Route::resource('salesinvoices', 'salesinvoicesController');
 Route::resource('produks', 'produkController');
+Route::get('/cek-product', 'produkController@cekproduct');
+
+Route::get('importExport', 'UpdateHargaController@importExport');
+Route::get('excel', 'UpdateHargaController@excel');
+Route::get('downloadExcel/{type}', 'UpdateHargaController@downloadExcel');
+Route::post('importExcel', 'UpdateHargaController@importExcel');
+Route::post('importAndExcel', 'UpdateHargaController@importAndExcel');

@@ -2,13 +2,17 @@
 <!-- Home / Dashboard -->
 <li class="{{ Request::is('home') ? 'active' : '' }}">
     <a href="home">
-        <i class="fa fa-home"></i> <span>Home</span>
+        <i class="fa fa-home"></i> <span>Beranda</span>
     </a>
 </li>
-
+{{ Request::is('UpdateHarga*') }}
 <!-- Master Menu -->
 @if(Auth::user()->level == '1' or Auth::user()->level == '2')
-<li class="treeview {{ Request::is('customers*') or Request::is('companies*') or Request::is('factories*') or Request::is('products*') or Request::is('salesPrices*') ? 'active' : '' }}">
+<li class="treeview
+  @if(Request::is('customers*') or Request::is('produks*') or Request::is('salesPrices*') or Request::is('UpdateHarga*'))
+        active
+  @endif
+  ">
     <a href="javascript:;">
         <i class="fa fa-database"></i>
         <span>Data Master</span>
@@ -27,8 +31,8 @@
             <a href="{!! route('salesPrices.index') !!}"><i class="fa fa-angle-double-right"></i><span>Harga Produk</span></a>
         </li>
 
-        <li class="{{ Request::is('ImportExport') ? 'active' : '' }}">
-            <a href="{{url('/importExport')}}"><i class="fa fa-angle-double-right"></i><span>Cek Update</span></a>
+        <li class="{{ Request::is('UpdateHarga*') ? 'active' : '' }}">
+            <a href="{{url('/importExport')}}"><i class="fa fa-angle-double-right"></i><span>Harga Produk(Excel)</span></a>
         </li>
 
     </ul>
@@ -37,7 +41,11 @@
 
 @if(Auth::user()->level == '1' or Auth::user()->level == '2' or Auth::user()->level == '3' or Auth::user()->level == '4')
 <!-- Transaction Menu -->
-<li class="treeview {{ Request::is('salesorders*') or Request::is('salesPrices*') or Request::is('salespayments*') ? 'active' : '' }}">
+<li class="treeview
+  @if(Request::is('salesorders*') or Request::is('salesinvoices*') or Request::is('salespayments*'))
+        active
+  @endif
+        ">
     <a href="javascript:;">
         <i class="fa fa-file-text-o"></i>
         <span>Data Transaksi</span>

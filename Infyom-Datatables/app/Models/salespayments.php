@@ -72,9 +72,7 @@ class salespayments extends Model
      */
     public static $rules = [
         'paymentNo' => 'required',
-        'invoiceID' => 'numeric',
-        'paymentDate' => 'date',
-        'effectiveDate' => 'date',
+        'paymentDate' => 'required',
         'customerID' => 'required',
         'totalPaid' => 'min:1'
     ];

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Contracts\Validation\Validator;
 
 /**
  * Class customers
@@ -25,7 +26,6 @@ class customers extends Model
         'customerName',
         'contactPerson',
         'address',
-        'address2',
         'village',
         'district',
         'city',
@@ -81,23 +81,9 @@ class customers extends Model
         'customerName' => 'required',
         'contactPerson' => 'required',
         'address' => 'required',
-        'address2' => 'min:5',
-        'village' => 'required',
-        'district' => 'required',
         'city' => 'required',
-        'zipCode' => 'numeric',
-        'province' => 'required',
-        'phone' => 'required',
-        'fax' => 'required',
         'phonecp1' => 'required',
-        'phonecp2' => 'required',
-        'email' => 'email',
-        'note' => 'min:4',
-        'npwp' => 'required',
-        'pkpName' => 'required',
-        'category' => 'required',
-        'status' => 'required'
+        'email' => 'email'
     ];
 
-    
 }

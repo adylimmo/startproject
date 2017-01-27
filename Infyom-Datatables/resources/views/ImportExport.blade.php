@@ -30,7 +30,7 @@
 				{{ csrf_field() }}
 				<br/>
 
-				<button class="btn btn-primary">Import CSV or Excel File</button>
+				<button class="btn btn-primary">Import Excel File</button>
 
 			</form>
 			<div style="border: 4px solid #a1a1a1;margin-top: 15px;padding: 20px;"> 		

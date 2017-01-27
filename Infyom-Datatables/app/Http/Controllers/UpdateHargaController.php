@@ -65,6 +65,8 @@ class UpdateHargaController extends Controller
 			$newArray[$no]['sku'] = $cekout['productCode'];
 			$newArray[$no]['nama'] = $cekout['ProductName'];
 			$newArray[$no]['satuan'] = $cekout['unitText'];
+			// $newArray[$no]['price'] = $cekout['price'];
+			// $newArray[$key]['id'] = $cekout['ids'];
 			foreach ($customerdata as $custids) {
 				$sales_prices = salesprice::select(
 					'price',
@@ -75,8 +77,8 @@ class UpdateHargaController extends Controller
 				if ($sales_prices->count() === 0) {
 					$newArray[$no][$custids['name']] = '0.00';
 				}else{
-				 	$sales_prices = $sales_prices->first();
-				 	$newArray[$no][$custids['name']] = $sales_prices->price;
+					$sales_prices = $sales_prices->first();
+					$newArray[$no][$custids['name']] = $sales_prices->price;
 				}
 			}
 			$no++;
@@ -87,7 +89,7 @@ class UpdateHargaController extends Controller
 		// }
 		
 		// echo "<pre>";
-		// print_r($newArray);
+		// print_r($data);
 		// echo "</pre>";
 		// die();
 		return Excel::create('update_example_cek', function($excel) use ($newArray,$data,$customerdata) {
@@ -110,29 +112,57 @@ class UpdateHargaController extends Controller
 
 		if($request->hasFile('import_file')){
 			$path = $request->file('import_file')->getRealPath();
-
+			
 			$data = Excel::load($path, function($reader) {})->get();
-			//dd($data);
+			
+
+			// echo "<pre>";
+			// print_r($data);
+			// echo "</pre>";
+			// die();
+
 			if(!empty($data) && $data->count()){
 
 				foreach ($data->toArray() as $key => $value) {
 					if(!empty($value)){
 						foreach ($value as $v) {		
-							$insert[] = ['customerID' => $v['1'], 'productID' => $v['sku'], 'productCode' => $v['sku'], 'price' => $v['1']];
+							$insert[] = [
+							'customerID' => $v['sku'],
+							'productID' => $v['sku'],
+							'productCode' => $v['sku'],
+							'price' => $v['grosir1']];
+
 						}
 					}
 				}
-
-				
-				if(!empty($insert)){
-					DB::table('sales_prices')->insert($insert);
-					return back()->with('success','Insert Record successfully.');
+				$sale = DB::table('sales_prices')
+				->select(
+					'productCode',
+					'productID',
+					'customerID',
+					'price')
+				->where('productCode', '=', $v['sku'])
+				->get();
+				if ($sale->count() === 0) {
+					DB::table('sales_prices')
+					->insert($insert);
+					return back()->with('success','Input Berhasil.');
 				}
-
+				else
+				{
+					DB::table('sales_prices')
+					->where('customerID', $insert[] = $v['sku'])
+					->where('productCode', $insert[] = $v['sku'])
+					->update($insert[] = [
+						'productID' => $v['grosir1'],
+						'price' => $v['grosir1']
+						]);
+					
+					
+					return back()->with('success','Update Berhasil.');
+				}
 			}
-
 		}
-
-		return back()->with('error','Please Check your file, Something is wrong there.');
+		return back()->with('error','Periksa Kembali File Anda.');
 	}
 }

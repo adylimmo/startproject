@@ -190,7 +190,10 @@
                        </div>
                    </div>
                    <div class="form-group col-sm-12">
-                       <input class="btn btn-primary" value="Simpan" type="submit" {{ $disabled }}>
+                       <button class="btn btn-primary" type="submit" {{ $disabled }}><i class="glyphicon glyphicon-floppy-disk"></i> Simpan</button>
+                       <a href="{{ route('salesinvoices.show', $salesinvoices->id) }}" target="_blank" class='btn btn-success '>
+                           <i class="glyphicon glyphicon-print"></i> Cetak Faktur Penjualan
+                       </a>
                        <a href="{!! route('salesinvoices.index') !!}" class="btn btn-default">Batal</a>
                    </div>
                    {!! Form::close() !!}

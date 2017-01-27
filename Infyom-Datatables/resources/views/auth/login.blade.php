@@ -39,14 +39,14 @@
 
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+        <p class="login-box-msg">Gunakan Username dan Password Untuk Login</p>
 
         <form method="post" action="{{ url('/login') }}">
             {!! csrf_field() !!}
 
             <div class="form-group has-feedback {{ $errors->has('username') ? ' has-error' : '' }}">
                 <input type="text" class="form-control" name="username" value="{{ old('username') }}" placeholder="Username">
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
                 @if ($errors->has('username'))
                     <span class="help-block">
                     <strong>{{ $errors->first('username') }}</strong>
@@ -68,19 +68,19 @@
                 <div class="col-xs-8">
                     <div class="checkbox icheck">
                         <label>
-                            <input type="checkbox" name="remember"> Remember Me
+                            <input type="checkbox" name="remember"> Tetap Login
                         </label>
                     </div>
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">L O G I N</button>
                 </div>
                 <!-- /.col -->
             </div>
         </form>
 
-        <a href="{{ url('/password/reset') }}">I forgot my password</a><br>
+        <a href="{{ url('/password/reset') }}">Lupa Password</a><br>
 
     </div>
     <!-- /.login-box-body -->

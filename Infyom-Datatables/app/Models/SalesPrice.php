@@ -46,7 +46,6 @@ class SalesPrice extends Model
     public static $rules = [
         'customerID' => 'numeric',
         'productID' => 'numeric',
-        'productCode' => 'required',
         'price' => 'numeric'
     ];
 

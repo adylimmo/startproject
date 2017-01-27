@@ -12,11 +12,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::group(['middleware' => ['auth']], function () {
-    Route::resource('companies', 'companyController');
-});
 Auth::routes();
 Route::get('/home', 'HomeController@index');
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('companies', 'companyController');
+
+
 Route::resource('stockProducts', 'stock_productsController');
 Route::resource('receives', 'receivesController');
 Route::resource('purchasePrices', 'purchase_priceController');
@@ -58,7 +59,7 @@ Route::resource('produks', 'produkController');
 Route::get('/cek-product', 'produkController@cekproduct');
 
 Route::get('importExport', 'UpdateHargaController@importExport');
-Route::get('excel', 'UpdateHargaController@excel');
 Route::get('downloadExcel/{type}', 'UpdateHargaController@downloadExcel');
 Route::post('importExcel', 'UpdateHargaController@importExcel');
-Route::post('importAndExcel', 'UpdateHargaController@importAndExcel');
+
+});

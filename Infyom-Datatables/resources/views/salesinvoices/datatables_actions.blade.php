@@ -1,6 +1,6 @@
 {!! Form::open(['route' => ['salesinvoices.destroy', $id], 'method' => 'delete']) !!}
 <div class='btn-group'>
-    <a href="{{ route('salesinvoices.show', $id) }}" class='btn btn-default btn-xs' data-toggle="tooltip" data-placement="bottom" title="Cetak Faktur Penjualan">
+    <a href="{{ route('salesinvoices.show', $id) }}" target="_blank" class='btn btn-default btn-xs' data-toggle="tooltip" data-placement="bottom" title="Cetak Faktur Penjualan">
         <i class="glyphicon glyphicon-print"></i>
     </a>
     <a href="{{ route('salesinvoices.edit', $id) }}" class='btn btn-default btn-xs' data-toggle="tooltip" data-placement="bottom" title="Ubah Faktur Penjualan">

@@ -124,6 +124,7 @@ class salesinvoicesController extends AppBaseController
                 'total' => $total,
                 'discount' => $discount,
                 'grandtotal' => $grandtotal,
+                'amountPaid' => '0',
                 'customerID' => $customerID,
                 'customerName' => $customerName,
                 'customerAddress' => $customerAddress,
@@ -145,7 +146,7 @@ class salesinvoicesController extends AppBaseController
                 /** update sales order status = 2 */
                 DB::table('salesorders')
                 ->where('id', $soID)
-                ->update(['status' => 2]);
+                ->update(['status' => 2, 'statusText' => 'Sudah Ada Invoice']);
 
                 Flash::success('Faktur penjualan tersimpan.');
                 return redirect(route('salesinvoices.index'));
@@ -209,7 +210,7 @@ class salesinvoicesController extends AppBaseController
         $items = DB::table('salesorderitems as soi')
         ->leftJoin('products as pr', 'pr.id', '=', 'soi.productID')
         ->where('soID', $dataPesan['soID'])
-        ->select('soi.*', 'pr.unit')
+        ->select('soi.*', 'pr.unitText')
         ->orderBy('id', 'asc')->get();
 
         $jumlah = 0;

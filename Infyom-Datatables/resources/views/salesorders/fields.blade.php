@@ -113,6 +113,11 @@
 
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
-    <input class="btn btn-primary" value="Simpan" type="submit" {{ $disabled }}>
+    <button class="btn btn-primary" type="submit" {{ $disabled }}><i class="glyphicon glyphicon-floppy-disk"></i> Simpan</button>
+    @if($action == 'edit')
+        <a href="{{ route('salesorders.show', $salesorders->id) }}" target="_blank" class='btn btn-success '>
+            <i class="glyphicon glyphicon-print"></i> Cetak Surat Jalan
+        </a>
+    @endif
     <a href="{!! route('salesorders.index') !!}" class="btn btn-default">Batal</a>
 </div>

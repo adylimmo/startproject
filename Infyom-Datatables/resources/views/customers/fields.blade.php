@@ -1,127 +1,145 @@
-<!-- Customercode Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('customerCode', 'Customercode:') !!}
-    {!! Form::text('customerCode', null, ['class' => 'form-control']) !!}
+<div class="col-sm-6">
+    <div class="form-group col-sm-12">
+        {!! Form::label('status', 'Status:',['class' => 'col-sm-4']) !!}
+        <div class="col-sm-8">
+            {!! Form::select('status',['active' => 'Aktif', 'inactive' => 'Tidak Aktif'], null, ['class' => 'form-control input-medium']) !!}
+        </div>
+    </div>
+    <div class="form-group col-sm-12">
+        {!! Form::label('customerCode', 'Kode Customer (*) :',['class' => 'col-sm-4']) !!}
+        <div class="col-sm-8">
+            {!! Form::text('customerCode', null, ['class' => 'form-control input-medium']) !!}
+        </div>
+    </div>
+
+    <!-- Customername Field -->
+    <div class="form-group col-sm-12">
+        {!! Form::label('customerName', 'Nama Customer (*) :',['class' => 'col-sm-4']) !!}
+        <div class="col-sm-8">
+            {!! Form::text('customerName', null, ['class' => 'form-control']) !!}
+        </div>
+    </div>
+
+    <!-- Address Field -->
+    <div class="form-group col-sm-12">
+        {!! Form::label('address', 'Alamat (*) :',['class' => 'col-sm-4']) !!}
+        <div class="col-sm-8">
+            {!! Form::textarea('address', null, ['class' => 'form-control']) !!}
+        </div>
+    </div>
+
+    <!-- Village Field -->
+    <div class="form-group col-sm-12">
+        {!! Form::label('village', 'Kelurahan:',['class' => 'col-sm-4']) !!}
+        <div class="col-sm-8">
+            {!! Form::text('village', null, ['class' => 'form-control']) !!}
+        </div>
+    </div>
+
+    <!-- District Field -->
+    <div class="form-group col-sm-12">
+        {!! Form::label('district', 'Kecamatan:',['class' => 'col-sm-4']) !!}
+        <div class="col-sm-8">
+            {!! Form::text('district', null, ['class' => 'form-control']) !!}
+        </div>
+    </div>
+
+    <!-- City Field -->
+    <div class="form-group col-sm-12">
+        {!! Form::label('city', 'Kota:',['class' => 'col-sm-4']) !!}
+        <div class="col-sm-8">
+            {!! Form::text('city', null, ['class' => 'form-control']) !!}
+        </div>
+    </div>
+
+    <!-- Province Field -->
+    <div class="form-group col-sm-12">
+        {!! Form::label('province', 'Propinsi:',['class' => 'col-sm-4']) !!}
+        <div class="col-sm-8">
+            {!! Form::text('province', null, ['class' => 'form-control']) !!}
+        </div>
+    </div>
+
+    <!-- Zipcode Field -->
+    <div class="form-group col-sm-12">
+        {!! Form::label('zipCode', 'Kodepos:',['class' => 'col-sm-4']) !!}
+        <div class="col-sm-8">
+            {!! Form::text('zipCode', null, ['class' => 'form-control input-small']) !!}
+        </div>
+    </div>
+
+    <!-- Phone Field -->
+    <div class="form-group col-sm-12">
+        {!! Form::label('phone', 'Telp:',['class' => 'col-sm-4']) !!}
+        <div class="col-sm-8">
+            {!! Form::text('phone', null, ['class' => 'form-control input-medium']) !!}
+        </div>
+    </div>
+
+    <!-- Fax Field -->
+    <div class="form-group col-sm-12">
+        {!! Form::label('fax', 'Fax:',['class' => 'col-sm-4']) !!}
+        <div class="col-sm-8">
+            {!! Form::text('fax', null, ['class' => 'form-control input-medium']) !!}
+        </div>
+    </div>
+
+    <div class="form-group col-sm-12">
+        <small>(*) Wajib Di isi </small>
+    </div>
 </div>
 
-<!-- Customername Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('customerName', 'Customername:') !!}
-    {!! Form::text('customerName', null, ['class' => 'form-control']) !!}
-</div>
+<div class="col-sm-6">
+    <div class="form-group col-sm-12">
+        {!! Form::label('contactPerson', 'Kontak (*) :',['class' => 'col-sm-4']) !!}
+        <div class="col-sm-8">
+            {!! Form::text('contactPerson', null, ['class' => 'form-control']) !!}
+        </div>
+    </div>
+    <!-- Phonecp1 Field -->
+    <div class="form-group col-sm-12">
+        {!! Form::label('phonecp1', 'HP (*) :',['class' => 'col-sm-4']) !!}
+        <div class="col-sm-8">
+            {!! Form::text('phonecp1', null, ['class' => 'form-control']) !!}
+        </div>
+    </div>
 
-<!-- Contactperson Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('contactPerson', 'Contactperson:') !!}
-    {!! Form::text('contactPerson', null, ['class' => 'form-control']) !!}
-</div>
+    <!-- Phonecp2 Field -->
+    <div class="form-group col-sm-12">
+        {!! Form::label('phonecp2', 'HP 2 :',['class' => 'col-sm-4']) !!}
+        <div class="col-sm-8">
+            {!! Form::text('phonecp2', null, ['class' => 'form-control']) !!}
+        </div>
+    </div>
 
-<!-- Address Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('address', 'Address:') !!}
-    {!! Form::text('address', null, ['class' => 'form-control']) !!}
-</div>
+    <!-- Email Field -->
+    <div class="form-group col-sm-12">
+        {!! Form::label('email', 'Email:',['class' => 'col-sm-4']) !!}
+        <div class="col-sm-8">
+            {!! Form::text('email', null, ['class' => 'form-control']) !!}
+        </div>
+    </div>
 
-<!-- Address2 Field -->
-<div class="form-group col-sm-12 col-lg-12">
-    {!! Form::label('address2', 'Address2:') !!}
-    {!! Form::textarea('address2', null, ['class' => 'form-control']) !!}
-</div>
+    <!-- Npwp Field -->
+    <div class="form-group col-sm-12">
+        {!! Form::label('npwp', 'Npwp:',['class' => 'col-sm-4']) !!}
+        <div class="col-sm-8">
+            {!! Form::text('npwp', null, ['class' => 'form-control']) !!}
+        </div>
+    </div>
 
-<!-- Village Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('village', 'Village:') !!}
-    {!! Form::text('village', null, ['class' => 'form-control']) !!}
+    <!-- Note Field -->
+    <div class="form-group col-sm-12 col-lg-12">
+        {!! Form::label('note', 'Note:',['class' => 'col-sm-4']) !!}
+        <div class="col-sm-8">
+            {!! Form::textarea('note', null, ['class' => 'form-control']) !!}
+        </div>
+    </div>
 </div>
-
-<!-- District Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('district', 'District:') !!}
-    {!! Form::text('district', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- City Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('city', 'City:') !!}
-    {!! Form::text('city', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Zipcode Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('zipCode', 'Zipcode:') !!}
-    {!! Form::text('zipCode', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Province Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('province', 'Province:') !!}
-    {!! Form::text('province', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Phone Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('phone', 'Phone:') !!}
-    {!! Form::text('phone', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Fax Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('fax', 'Fax:') !!}
-    {!! Form::text('fax', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Phonecp1 Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('phonecp1', 'Phonecp1:') !!}
-    {!! Form::text('phonecp1', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Phonecp2 Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('phonecp2', 'Phonecp2:') !!}
-    {!! Form::text('phonecp2', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Email Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('email', 'Email:') !!}
-    {!! Form::text('email', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Note Field -->
-<div class="form-group col-sm-12 col-lg-12">
-    {!! Form::label('note', 'Note:') !!}
-    {!! Form::textarea('note', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Npwp Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('npwp', 'Npwp:') !!}
-    {!! Form::text('npwp', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Pkpname Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('pkpName', 'Pkpname:') !!}
-    {!! Form::text('pkpName', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Category Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('category', 'Category:') !!}
-    {!! Form::text('category', null, ['class' => 'form-control']) !!}
-</div>
-
-<!-- Status Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('status', 'Status:') !!}
-    {!! Form::text('status', null, ['class' => 'form-control']) !!}
-</div>
-
 
 
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
-    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-    <a href="{!! route('customers.index') !!}" class="btn btn-default">Cancel</a>
+    {!! Form::submit('S I M P A N', ['class' => 'btn btn-primary']) !!}
+    <a href="{!! route('customers.index') !!}" class="btn btn-default">B A T A L</a>
 </div>

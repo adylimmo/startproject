@@ -128,7 +128,7 @@ class salespaymentsController extends AppBaseController
                     /** cek invoice **/
                     $invCek = DB::table('salesinvoices')
                         ->where('id', $amountid[$k])
-                        ->select('invoiceNo', 'amountPaid', 'grandtotal')
+                        ->select('soID', 'invoiceNo', 'amountPaid', 'grandtotal')
                         ->get()->first();
 
                     if ($amountpaid[$k] > 0) {
@@ -145,6 +145,11 @@ class salespaymentsController extends AppBaseController
                             $invStat = '2';
                             $invStattext = 'Dibayar Sebagian';
                         }
+
+                        /** ubah faktur pemesanan **/
+                        DB::table('salesorders')
+                            ->where('id', $invCek->soID)
+                            ->update(['status' => '3', 'statusText' => 'Sudah Ada Pembayaran']);
 
                         /** ubah faktur penjualan **/
                         DB::table('salesinvoices')
@@ -165,10 +170,12 @@ class salespaymentsController extends AppBaseController
 
                     /*** simpan aksi ke tabel log Admin ***/
                     Flash::success('Pembayaran tersimpan.');
+                    return redirect(route('salespayments.index'));
                 } else {
                     /** hapus Pembayaran */
                     DB::table('salespayments')->where('id', $paymentID)->delete();
                     Flash::error('Pembayaran gagal disimpan.');
+                    return redirect(route('salespayments.create'));
                 }
             }else
             {

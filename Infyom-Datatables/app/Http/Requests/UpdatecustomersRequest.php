@@ -27,4 +27,22 @@ class UpdatecustomersRequest extends FormRequest
     {
         return customers::$rules;
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'customerCode.required' => 'Kode Customer harus di isi',
+            'customerName.required' => 'Nama Customer harus di isi',
+            'contactPerson.required' => 'Kontak harus di isi',
+            'address.required' => 'Alamat harus di isi',
+            'city.required' => 'Kode Customer harus di isi',
+            'phonecp1.required' => 'Nomor HP harus di isi',
+            'email.email' => 'Gunakan alamat email yang benar'
+        ];
+    }
 }

@@ -27,4 +27,19 @@ class UpdatesalespaymentsRequest extends FormRequest
     {
         return salespayments::$rules;
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'paymentNo.required' => 'Pilih Customer terlebih dahulu untuk mengisi Nomor Faktur',
+            'paymentDate.required' => 'Tanggal Faktur harus di isi',
+            'customerID.required' => 'Customer harus di isi',
+            'totalPaid.min:1' => 'Total Pembayaran tidak boleh kosong'
+        ];
+    }
 }

@@ -65,10 +65,7 @@ class salesorders extends Model
      */
     public static $rules = [
         'soNo' => 'required',
-        'customerID' => 'numeric',
-        'customerName' => 'required',
-        'orderDate' => 'date',
-        'needDate' => 'date'
+        'customerID' => 'required',
     ];
 
     

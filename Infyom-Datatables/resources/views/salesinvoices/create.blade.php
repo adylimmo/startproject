@@ -87,7 +87,6 @@
     <div class="content">
         @include('adminlte-templates::common.errors')
         <div class="box box-primary">
-
             <div class="box-body">
                 <div class="row">
                     {!! Form::open(['route' => 'salesinvoices.store']) !!}
@@ -191,7 +190,7 @@
                         </div>
                     </div>
                     <div class="form-group col-sm-12">
-                        <input class="btn btn-primary" value="Simpan" type="submit">
+                        <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-floppy-disk"></i> Simpan</button>
                         <a href="{!! route('salesorders.index') !!}" class="btn btn-default">Batal</a>
                     </div>
                     {!! Form::close() !!}

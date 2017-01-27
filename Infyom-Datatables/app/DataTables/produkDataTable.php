@@ -69,8 +69,8 @@ class produkDataTable extends DataTable
     private function getColumns()
     {
         return [
-            'productCode' => ['name' => 'productCode', 'data' => 'productCode'],
-            'productName' => ['name' => 'productName', 'data' => 'productName'],
+            'SKU' => ['name' => 'productCode', 'data' => 'productCode'],
+            'Nama Produk' => ['name' => 'productName', 'data' => 'productName'],
             'unit' => ['name' => 'unitText', 'data' => 'unitText']
         ];
     }

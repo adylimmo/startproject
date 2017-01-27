@@ -71,10 +71,10 @@
 	<tr>
 		<th style='width: 10mm; padding: 2px 0px 2px 0px; font-size: 12pt; border-top: 1px solid #000; border-bottom: 1px solid #000; text-align: left;'>NO.</th>
 		<th style='width: 25mm; padding: 2px 0px 2px 0px; font-size: 12pt; border-top: 1px solid #000; border-bottom: 1px solid #000; text-align: left;'>SKU</th>
-		<th style='width: 130mm; padding: 2px 0px 2px 0px; font-size: 12pt; border-top: 1px solid #000; border-bottom: 1px solid #000;text-align: left;'>NAMA PRODUK</th>
-		<th style='width: 25mm; padding: 2px 0px 2px 0px; font-size: 12pt; border-top: 1px solid #000; border-bottom: 1px solid #000; text-align: right;'>HARGA</th>
-		<th style='width: 15mm; padding: 2px 0px 2px 0px; font-size: 12pt; border-top: 1px solid #000; border-bottom: 1px solid #000; text-align: right;'>QTY</th>
-		<th style='width: 45mm; padding: 2px 0px 2px 0px; font-size: 12pt; border-top: 1px solid #000; border-bottom: 1px solid #000; text-align: right;'>SUBTOTAL</th>
+		<th style='width: 115mm; padding: 2px 0px 2px 0px; font-size: 12pt; border-top: 1px solid #000; border-bottom: 1px solid #000;text-align: left;'>NAMA PRODUK</th>
+		<th style='width: 35mm; padding: 2px 0px 2px 0px; font-size: 12pt; border-top: 1px solid #000; border-bottom: 1px solid #000; text-align: right;'>HARGA</th>
+		<th style='width: 30mm; padding: 2px 0px 2px 0px; font-size: 12pt; border-top: 1px solid #000; border-bottom: 1px solid #000; text-align: right;'>QTY</th>
+		<th style='width: 50mm; padding: 2px 0px 2px 0px; font-size: 12pt; border-top: 1px solid #000; border-bottom: 1px solid #000; text-align: right;'>SUBTOTAL</th>
 	</tr>
 	@foreach($items as $items)
 	<tr valign='top'>
@@ -82,7 +82,7 @@
 		<td style='padding: 2px 0px 2px 0px; font-size: 12pt;text-align: left;'>{{$items->sku}}</td>
 		<td style='padding: 2px 0px 2px 0px; font-size: 12pt;text-align: left;'>{{$items->productName}}</td>
 		<td style='padding: 2px 30px 2px 0px; font-size: 12pt; text-align: right;'>{{number_format($items->price,0,',','.')}}</td>
-		<td style='padding: 2px 0px 2px 0px; font-size: 12pt; text-align: right;'>{{$items->qty}}</td>
+		<td style='padding: 2px 0px 2px 0px; font-size: 12pt; text-align: right;'>{{$items->qty}} {{$items->unitText}}</td>
 		<td style='padding: 2px 0px 2px 0px; font-size: 12pt; text-align: right;'>
 			{{ number_format($items->qty * $items->price,0,',','.') }}
 		</td>

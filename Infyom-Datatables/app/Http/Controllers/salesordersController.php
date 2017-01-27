@@ -184,7 +184,7 @@ class salesordersController extends AppBaseController
         $items = DB::table('salesorderitems as soi')
             ->leftJoin('products as pr',  'pr.id', '=', 'soi.productID')
             ->where('soID',$id)
-            ->select('soi.*', 'pr.unit')
+            ->select('soi.*', 'pr.unitText')
             ->orderBy('id', 'asc')->get();
 
         $pdf = PDF::loadView('prints.print_salesorder',compact('items','no','salesorders','nopro'));

@@ -27,4 +27,18 @@ class UpdatesalesinvoicesRequest extends FormRequest
     {
         return salesinvoices::$rules;
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'invoiceNo.required' => 'Nomor Faktur harus di isi',
+            'invoiceDate.required' => 'Tanggal Faktur harus di isi',
+            'soID.required' => 'Faktur Pemesanan harus di isi'
+        ];
+    }
 }

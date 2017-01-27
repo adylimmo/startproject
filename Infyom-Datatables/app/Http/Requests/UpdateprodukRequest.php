@@ -27,4 +27,17 @@ class UpdateprodukRequest extends FormRequest
     {
         return produk::$rules;
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'productCode.required' => 'SKU harus di isi',
+            'productName.required' => 'Nama Produk harus di isi'
+        ];
+    }
 }

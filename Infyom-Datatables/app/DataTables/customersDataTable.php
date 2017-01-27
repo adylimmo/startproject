@@ -47,7 +47,6 @@ class customersDataTable extends DataTable
                 'dom' => 'Bfrtip',
                 'scrollX' => false,
                 'buttons' => [
-                    'reset',
                     'reload',
                     [
                          'extend'  => 'collection',

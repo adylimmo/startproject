@@ -7,10 +7,15 @@ use App\Http\Requests;
 use App\Http\Requests\CreateSalesPriceRequest;
 use App\Http\Requests\UpdateSalesPriceRequest;
 use App\Repositories\SalesPriceRepository;
+use App\Models\customers;
+use App\Models\salesprice;
+use App\Models\produk;
 use Flash;
 use DB;
 use App\Http\Controllers\AppBaseController;
 use Response;
+use Validator;
+use Illuminate\Support\Facades\Redirect;
 
 class SalesPriceController extends AppBaseController
 {
@@ -39,10 +44,10 @@ class SalesPriceController extends AppBaseController
      *
      * @return Response
      */
-    public function create()
+    /*public function create()
     {
         return view('sales_prices.create');
-    }
+    }*/
 
     /**
      * Store a newly created SalesPrice in storage.
@@ -51,7 +56,7 @@ class SalesPriceController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateSalesPriceRequest $request)
+    /*public function store(CreateSalesPriceRequest $request)
     {
         $input = $request->all();
 
@@ -61,6 +66,7 @@ class SalesPriceController extends AppBaseController
 
         return redirect(route('salesPrices.index'));
     }
+    */
 
     /**
      * Display the specified SalesPrice.
@@ -95,42 +101,52 @@ class SalesPriceController extends AppBaseController
      */
     public function edit($id)
     {
-        /*$customer = DB::table('customers')
-            ->where('id', $id)
-            ->select('id', 'customerCode', 'customerName')
+        $customerdata = customers::select('id', 'customerCode', 'customerName')
+            ->where('id', '=', $id)
             ->get();
 
-        if($customer->count() === 0)
-        {
-            Flash::error('Customer tidak ditemukan');
+        if($customerdata->count() === 0){
+            Flash::error('Customer tidak ditemukan!');
             return redirect(route('salesPrices.index'));
+        }else{
+            $newArray = [];
+            $customer = $customerdata->first();
+            $data = produk::select(
+                'id',
+                'productCode',
+                'ProductName',
+                'unitText'
+            )->where('status', '=', 'active')->get();
+
+            $no = 0;
+            foreach ($data as $key => $cekout) {
+                $sales_prices = salesprice::select(
+                    'price',
+                    'id'
+                )->where('customerID', '=', $customer->id)
+                    ->where('productID', '=', $cekout->id)
+                    ->get();
+
+                if ($sales_prices->count() === 0) {
+                    $newArray[$no]['price'] = '0';
+                    $newArray[$no]['priceid'] = '0';
+                }else{
+                    $sales_prices = $sales_prices->first();
+                    $newArray[$no]['price'] = number_format($sales_prices->price, 0,'','');
+                    $newArray[$no]['priceid'] = $sales_prices->id;
+                }
+
+                $newArray[$no]['produkid'] = $cekout['id'];
+                $newArray[$no]['sku'] = $cekout['productCode'];
+                $newArray[$no]['nama'] = $cekout['ProductName'];
+                $newArray[$no]['satuan'] = $cekout['unitText'];
+                $no++;
+            }
+
+            return view('sales_prices.edit', compact('customer', 'newArray'));
         }
-
-        $customer = $customer->first();
-        $harga = DB::table('sales_prices')
-            ->leftJoin('products', 'products.id', '=', 'sales_prices.productID')
-            ->where('sales_prices.customerID', $id)
-            ->select('sales_prices.*', 'products.productName')
-            ->get();
-
-        return view('sales_prices.edit', compact('customer', 'harga'));
-        */
-
-        $salesPrice = $this->salesPriceRepository->findWithoutFail($id);
-
-        if (empty($salesPrice)) {
-            Flash::error('Customer Tidak ditemukan');
-
-            return redirect(route('salesPrices.index'));
-        }
-
-        $harga = DB::table('products')
-            ->leftJoin('sales_prices', 'sales_prices.productID', '=', 'products.id')
-            ->where('sales_prices.customerID', $id)
-            ->select('sales_prices.*', 'products.productName')
-            ->get();
-        return view('sales_prices.edit', compact('salesPrice', 'harga'));
     }
+
 
     /**
      * Update the specified SalesPrice in storage.
@@ -142,19 +158,44 @@ class SalesPriceController extends AppBaseController
      */
     public function update($id, UpdateSalesPriceRequest $request)
     {
-        $salesPrice = $this->salesPriceRepository->findWithoutFail($id);
+        $customerdata = customers::select('id', 'customerCode', 'customerName')
+            ->where('id', '=', $id)
+            ->get();
 
-        if (empty($salesPrice)) {
-            Flash::error('Sales Price not found');
-
+        if($customerdata->count() === 0){
+            Flash::error('Customer tidak ditemukan!');
             return redirect(route('salesPrices.index'));
+        }else {
+
+            $harga = $request->input('harga');
+            $produkid = $request->input('produkid');
+            $produkcode = $request->input('produkcode');
+            $hargaid = $request->input('hargaid');
+            $customerid = $request->input('customerid');
+
+            $insertPrica = [];
+            for($k = 0; $k<count($produkid); $k++)
+            {
+                if($hargaid[$k] > 0)
+                {   // update
+                    DB::table('sales_prices')
+                        ->where('id', '=', $hargaid[$k])
+                        ->update([ 'price' => $harga[$k]]);
+                }else
+                {
+                    // insert
+                    $insertPrica[] = ['customerID' => $id, 'productID' => $produkid[$k], 'productCode' => $produkcode[$k], 'price' => $harga[$k]];
+                }
+            }
+
+            if(!empty($insertPrica)){
+                DB::table('sales_prices')->insert($insertPrica);
+                Flash::success('Harga Produk Tersimpan.');
+                return redirect(route('salesPrices.index'));
+            }else{
+                return back()->with('error','Gagal simpan harga produk.');
+            }
         }
-
-        $salesPrice = $this->salesPriceRepository->update($request->all(), $id);
-
-        Flash::success('Sales Price updated successfully.');
-
-        return redirect(route('salesPrices.index'));
     }
 
     /**

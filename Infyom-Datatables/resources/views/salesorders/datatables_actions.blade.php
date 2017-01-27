@@ -3,7 +3,7 @@
     <a href="{{ route('salesinvoices.create', 'soID=' .$id) }}" class='btn btn-default btn-xs' data-toggle="tooltip" data-placement="bottom" title="Buat Faktur Penjualan">
         <i class="glyphicon glyphicon-file"></i>
     </a>
-    <a href="{{ route('salesorders.show', $id) }}" class='btn btn-default btn-xs' data-toggle="tooltip" data-placement="bottom" title="Cetak Surat Jalan">
+    <a href="{{ route('salesorders.show', $id) }}" target="_blank" class='btn btn-default btn-xs' data-toggle="tooltip" data-placement="bottom" title="Cetak Surat Jalan">
         <i class="glyphicon glyphicon-print"></i>
     </a>
     <a href="{{ route('salesorders.edit', $id) }}" class='btn btn-default btn-xs' data-toggle="tooltip" data-placement="bottom" title="Ubah Pemesanan">

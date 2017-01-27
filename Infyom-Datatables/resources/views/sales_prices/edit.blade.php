@@ -3,7 +3,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Ubah Harga {{ $salesPrice->customerName }}
+            Ubah Harga {{ $customer->customerName }}
         </h1>
    </section>
    <div class="content">
@@ -11,15 +11,29 @@
        <div class="box box-primary">
            <div class="box-body">
                <div class="row">
-                   {!! Form::model($salesPrice, ['class'=> 'form-horizontal', 'route' => ['salesPrices.update', $salesPrice->id], 'method' => 'patch']) !!}
-                    @foreach($harga as $harga)
-                       <div class="form-group col-sm-12">
-                           {!! Form::label('harga' . $harga->id, $harga->productName .':', ['class' => 'col-sm-4']) !!}
-                           <div class="col-sm-4">
-                           {!! Form::text('harga' . $harga->id, null, ['class' => 'form-control']) !!}
-                           </div>
-                       </div>
-                    @endforeach
+                   {!! Form::model($customer, ['class'=> 'form-horizontal', 'route' => ['salesPrices.update', $customer->id], 'method' => 'patch']) !!}
+                   <table  class="table table-hover" style="width: 50%";>
+                       <thead><tr><th >S K U</th><th style="width: 50%">Nama Produk</th><th >Harga</th></tr></thead>
+                       <tbody>
+                       @foreach($newArray  as $key=>$value)
+                           <tr>
+                               <td >{{ $value['sku'] }}</td>
+                               <td >{{ $value['nama'] }}</td>
+                               <td >
+                                   <input type="text" name="harga[]" value="{{ $value['price'] }}" />
+                                   <input type="hidden" name="produkid[]" value="{{ $value['produkid'] }}" />
+                                   <input type="hidden" name="produkcode[]" value="{{ $value['sku'] }}" />
+                                   <input type="hidden" name="hargaid[]" value="{{ $value['priceid'] }}" /></td>
+                           </tr>
+                        @endforeach
+                       </tbody>
+                   </table>
+                   <input type="hidden" name="customerid" value="{{ $customer->id }}" />
+                   <!-- Submit Field -->
+                   <div class="form-group col-sm-12">
+                       {!! Form::submit('SIMPAN', ['class' => 'btn btn-primary']) !!}
+                       <a href="{!! route('salesPrices.index') !!}" class="btn btn-default">Cancel</a>
+                   </div>
                    {!! Form::close() !!}
                </div>
            </div>

@@ -27,4 +27,17 @@ class CreatesalesordersRequest extends FormRequest
     {
         return salesorders::$rules;
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'soNo.required' => 'Silahkan Pilih Customer untuk mengisi Nomor Faktur',
+            'customerID.required' => 'Customer harus di isi'
+        ];
+    }
 }

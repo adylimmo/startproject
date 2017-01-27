@@ -24,12 +24,12 @@
                    {!! Form::model($produk, ['route' => ['produks.update', $id], 'method' => 'patch', 'class' => 'form-horizontal']) !!}
                     <div class="col-sm-6">
                         <div class="form-group col-sm-12">
-                            {!! Form::label('productCode', 'SKU:') !!}
-                            {!! Form::text('productCode', null, ['class' => 'form-control input-medium']) !!}
+                            {!! Form::label('productCode', 'SKU (*) :') !!}
+                            {!! Form::text('productCode', null, ['class' => 'form-control input-medium', 'readonly' => 'readonly']) !!}
                         </div>
                         <!-- Productname Field -->
                         <div class="form-group col-sm-12">
-                            {!! Form::label('productName', 'Nama Produk:') !!}
+                            {!! Form::label('productName', 'Nama Produk (*) :') !!}
                             {!! Form::text('productName', null, ['class' => 'form-control input-large']) !!}
                         </div>
 

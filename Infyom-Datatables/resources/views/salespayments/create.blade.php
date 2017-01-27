@@ -183,7 +183,7 @@
                     </div>
 
                     <div class="form-group col-sm-12">
-                        {!! Form::button('Save', ['class' => 'btn btn-primary', 'id' => 'btnsimpan']) !!}
+                        <button class="btn btn-primary" type="submit" id="btnsimpan"><i class="glyphicon glyphicon-floppy-disk"></i> Simpan</button>
                         <a href="{!! route('salespayments.index') !!}" class="btn btn-default">Cancel</a>
                     </div>
                     {!! Form::close() !!}

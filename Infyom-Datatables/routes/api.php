@@ -61,3 +61,15 @@ Route::resource('suppliers', 'suppliersAPIController');
 
 
 Route::resource('produks', 'produkAPIController');
+
+
+
+
+
+
+
+Route::resource('reportsales', 'reportsalesAPIController');
+
+Route::resource('reportinvoices', 'reportinvoiceAPIController');
+
+Route::resource('reportpayments', 'reportpaymentAPIController');

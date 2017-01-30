@@ -34,13 +34,13 @@ class UpdateHargaController extends Controller
 		$customerdata = customers::select(
 			'id',
 			'customerName',
-			\DB::raw("concat(customers.customerName, '#', customers.id) as `name`"),
+			\DB::raw("concat(customers.customerName, '_', customers.id) as `name`"),
 			'customerCode')->get();
 		$joindata = customers::join('sales_prices', 'sales_prices.customerID', '=', 'customers.id')
 		->select(
 			'customers.id',
 			'customers.customerName',
-			\DB::raw("concat(customers.customerName, '#', customers.id) as `name`"),
+			\DB::raw("concat(customers.customerName, '_', customers.id) as `name`"),
 			'customers.customerCode',
 			'sales_prices.price')->get();
 		$datajoin = [];
@@ -89,7 +89,7 @@ class UpdateHargaController extends Controller
 		// }
 		
 		// echo "<pre>";
-		// print_r($data);
+		// print_r($newArray);
 		// echo "</pre>";
 		// die();
 		return Excel::create('update_example_cek', function($excel) use ($newArray,$data,$customerdata) {
@@ -102,67 +102,42 @@ class UpdateHargaController extends Controller
 
 	}
 
-	/**
-     * Import file into database Code
-     *
-     * @var array
-     */
+	
 	public function importExcel(Request $request)
 	{
-
 		if($request->hasFile('import_file')){
 			$path = $request->file('import_file')->getRealPath();
-			
-			$data = Excel::load($path, function($reader) {})->get();
-			
 
-			// echo "<pre>";
-			// print_r($data);
-			// echo "</pre>";
-			// die();
+			$data = Excel::load($path, function($reader) {
+				
+			})->get();
+			echo "<pre>";
+			print_r($data);
+			echo "</pre>";
+			die();
 
 			if(!empty($data) && $data->count()){
 
 				foreach ($data->toArray() as $key => $value) {
 					if(!empty($value)){
 						foreach ($value as $v) {		
-							$insert[] = [
-							'customerID' => $v['sku'],
+							$insert[] = ['customerID' => $v['sku'],
 							'productID' => $v['sku'],
-							'productCode' => $v['sku'],
-							'price' => $v['grosir1']];
-
+							'productCode' => $v['sku']];
 						}
 					}
 				}
-				$sale = DB::table('sales_prices')
-				->select(
-					'productCode',
-					'productID',
-					'customerID',
-					'price')
-				->where('productCode', '=', $v['sku'])
-				->get();
-				if ($sale->count() === 0) {
-					DB::table('sales_prices')
-					->insert($insert);
-					return back()->with('success','Input Berhasil.');
+
+				
+				if(!empty($insert)){
+					salesprice::insert($insert);
+					return back()->with('success','Insert Record successfully.');
 				}
-				else
-				{
-					DB::table('sales_prices')
-					->where('customerID', $insert[] = $v['sku'])
-					->where('productCode', $insert[] = $v['sku'])
-					->update($insert[] = [
-						'productID' => $v['grosir1'],
-						'price' => $v['grosir1']
-						]);
-					
-					
-					return back()->with('success','Update Berhasil.');
-				}
+
 			}
+
 		}
-		return back()->with('error','Periksa Kembali File Anda.');
+
+		return back()->with('error','Please Check your file, Something is wrong there.');
 	}
 }

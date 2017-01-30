@@ -72,3 +72,39 @@
     </ul>
 </li>
 @endif
+
+
+@if(Auth::user()->level == '1' or Auth::user()->level == '2')
+    <!-- Transaction Menu -->
+    <li class="treeview
+  @if(Request::is('reportsales*') or Request::is('salesinvoices*') or Request::is('reportpayments*'))
+            active
+      @endif
+            ">
+        <a href="javascript:;">
+            <i class="fa fa-print"></i>
+            <span>Laporan Transaksi</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            @if(Auth::user()->level == '1' or Auth::user()->level == '2')
+                <li class="{{ Request::is('reportsales*') ? 'active' : '' }}">
+                    <a href="{!! route('reportsales.index') !!}"><i class="fa fa-angle-double-right"></i><span>Pemesanan</span></a>
+                </li>
+            @endif
+
+            @if(Auth::user()->level == '1' or Auth::user()->level == '2')
+                <li class="{{ Request::is('reportinvoices*') ? 'active' : '' }}">
+                    <a href="{!! route('reportinvoices.index') !!}"><i class="fa fa-angle-double-right"></i><span>Faktur Penjualan</span></a>
+                </li>
+            @endif
+
+            @if(Auth::user()->level == '1' or Auth::user()->level == '2')
+                <li class="{{ Request::is('reportpayments*') ? 'active' : '' }}">
+                    <a href="{!! route('reportpayments.index') !!}"><i class="fa fa-angle-double-right"></i><span>Faktur Pembayaran</span></a>
+                </li>
+            @endif
+        </ul>
+    </li>
+@endif
+
